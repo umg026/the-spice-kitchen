@@ -759,19 +759,19 @@ section,
 section.white-bg {
     background-color: #fcfcfc;
     clear: both;
-    border-bottom: 30px solid #222;
+    border-bottom: 1px solid #222;
 }
 
 .top-border-me {
-    border-top: 30px solid #222;
+    border-top: 1px solid #222;
 }
 
 .left-half {
-    border-right: 15px solid #222;
+    border-right: 1px solid #222;
 }
 
 .right-half {
-    border-left: 15px solid #222;
+    border-left: 1px solid #222;
 }
 
 .silver-bg {
@@ -832,6 +832,7 @@ section h3.section-subheading {
     font-weight: 300;
     clear: both;
     display: block;
+    margin: 0 auto;
     padding-top: 20px;
     letter-spacing: 1px;
 }
@@ -1733,11 +1734,17 @@ footer.white-wrapper .social-links li a {
     }
 
     .navbar-default .navbar-brand {
-        font-size: 24px;
+        font-size: 13px;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         transition: all .3s;
+        letter-spacing: 2px !important;
         font-weight: 900;
+        white-space: normal;
+    }
+
+    .section .section-subheading {
+        margin: 0px !important;
     }
 
     .navbar-default.navbar-shrink {
@@ -1802,8 +1809,14 @@ footer.white-wrapper .social-links li a {
         color: #222;
     }
 
+   
+
     .navbar-default .navbar-brand {
         margin-top: 2px;
+        font-size: 13px;
+        letter-spacing: 2px !important;
+        font-weight: 900;
+        white-space: normal;
     }
 
     .nav-justified>li {
@@ -2286,4 +2299,15 @@ a#back-to-top.show {
 
 .food-menu-item h3 {
     margin-top: 0;
+}
+
+
+@media (max-width: 767px) {
+     .section .section-subheading {
+        margin: 0 !important;
+    }
+
+    .col-xs-9 {
+        width: 100% !important;
+    }
 }
