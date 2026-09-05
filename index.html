@@ -329,6 +329,139 @@
       font-size: 11.5px;
     }
 
+    /* ================= CLEAN LIGHT SECTIONS ================= */
+    /* Categories, Story and How It Works use a clean white/black treatment. */
+    .cat-picker,
+    .story,
+    .how {
+      background: #ffffff;
+      color: #171310;
+    }
+
+    .cat-picker {
+      border-bottom: 1px solid #e7e1d8;
+    }
+
+    .cat-picker h2,
+    .cat-picker .cat-picker-sub,
+    .cat-tile,
+    .cat-tile-label,
+    .story-copy h2,
+    .how .section-title,
+    .how-card h4 {
+      color: #171310;
+    }
+
+    .cat-picker .cat-picker-sub,
+    .story-copy p,
+    .story-copy p.lead,
+    .story-stats div span,
+    .how-card p {
+      color: #4b463f;
+    }
+
+    .cat-picker .cat-tile-photo {
+      background: #f5f2ed;
+      border-color: #ddd5c8;
+      box-shadow: 0 10px 24px -14px rgba(0, 0, 0, .28);
+    }
+
+    .cat-picker .cat-tile:hover .cat-tile-photo,
+    .cat-picker .cat-tile:focus-visible .cat-tile-photo {
+      border-color: var(--gold);
+      box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .2);
+    }
+
+    .story {
+      border-top: 1px solid #eee9e1;
+      border-bottom: 1px solid #eee9e1;
+    }
+
+    .story-visual {
+      background: linear-gradient(160deg, #f6f1e7, #ffffff 68%);
+      border-color: #d8c7a6;
+      box-shadow: 0 24px 50px -30px rgba(0, 0, 0, .22);
+    }
+
+    .story-visual::before {
+      border-color: rgba(201, 150, 44, .45);
+    }
+
+    .story-visual .mark {
+      filter: drop-shadow(0 16px 26px rgba(0, 0, 0, .16));
+    }
+
+    .story-stats {
+      border-top-color: #e4ddd3;
+    }
+
+    .how {
+      border-bottom: 1px solid #eee9e1;
+    }
+
+    .how-card {
+      border-color: #ded8cf;
+      background: #ffffff;
+    }
+
+    .how-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 14px 30px -24px rgba(0, 0, 0, .3);
+    }
+
+    /* ================= CLEAN HERO ================= */
+    /* Remove the decorative food illustrations and use a calm, premium backdrop. */
+    .hero {
+      background:
+        radial-gradient(ellipse at 50% -20%, rgba(201, 150, 44, .16), transparent 55%),
+        linear-gradient(145deg, #fffdf8 0%, #f6efe3 55%, #efe4d2 100%);
+      color: #171310;
+    }
+
+    .hero-spice-glow,
+    .hero-garnish {
+      display: none;
+    }
+
+    .hero h1 {
+      color: #171310;
+    }
+
+    .hero h1 em {
+      color: var(--maroon);
+    }
+
+    .hero-sub {
+      color: #4b463f;
+    }
+
+    .hero .btn-ghost {
+      color: #171310;
+      border-color: rgba(23, 19, 16, .22);
+    }
+
+    .hero .btn-ghost:hover {
+      border-color: var(--gold);
+      background: rgba(201, 150, 44, .08);
+    }
+
+    .hero-badges {
+      border-color: rgba(23, 19, 16, .16);
+      background: rgba(255, 255, 255, .42);
+    }
+
+    .hero-badges div {
+      border-right-color: rgba(23, 19, 16, .12);
+    }
+
+    .hero-badges strong {
+      color: var(--maroon);
+    }
+
+    .hero-badges span {
+      color: #5a5140;
+    }
+
     /* ================= HEADER ================= */
     .site-header {
       position: sticky;
@@ -477,6 +610,131 @@
 
     .nav-toggle {
       display: none;
+    }
+
+    /* ================= CATEGORY PICKER ================= */
+    .cat-picker {
+      position: relative;
+      padding: 44px 0 40px;
+      background: var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cat-picker .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .cat-picker-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      object-fit: cover;
+      vertical-align: middle;
+      margin: 0 2px;
+      border: 1px solid var(--line);
+    }
+
+    .cat-picker h2 {
+      font-family: var(--ff-display);
+      font-weight: 800;
+      font-size: clamp(22px, 3vw, 30px);
+      color: var(--ivory);
+      margin: 0 0 4px;
+    }
+
+    .cat-picker .cat-picker-sub {
+      color: var(--ivory-dim);
+      font-size: 14.5px;
+      margin: 0 0 26px;
+      max-width: 560px;
+    }
+
+    .cat-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 22px 16px;
+    }
+
+    .cat-tile {
+      background: none;
+      border: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-family: var(--ff-body);
+      color: var(--ivory);
+    }
+
+    .cat-tile-photo {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--ink-soft);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 24px -12px rgba(0, 0, 0, .55);
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .cat-tile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cat-tile:hover .cat-tile-photo,
+    .cat-tile:focus-visible .cat-tile-photo {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .65);
+      border-color: var(--gold-soft);
+    }
+
+    .cat-tile-label {
+      font-size: 13.5px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--ivory);
+    }
+
+    @media (max-width: 860px) {
+      .cat-picker-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px 12px;
+      }
+
+      .cat-tile-photo {
+        width: 68px;
+        height: 68px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .cat-picker-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .cat-tile-photo {
+        width: 62px;
+        height: 62px;
+      }
+
+      .cat-tile-label {
+        font-size: 12px;
+      }
+    }
+
+    /* Category detail modal */
+    .cat-modal-panel {
+      max-width: 640px;
+      width: 100%;
+    }
+
+    .cat-modal-panel .modal-body {
+      max-height: 70vh;
     }
 
     /* ================= HERO ================= */
@@ -1060,6 +1318,24 @@
       font-size: 15px;
       color: var(--maroon);
       white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1.3;
+    }
+
+    .price-original {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-text-dim);
+      text-decoration: line-through;
+      opacity: .8;
+    }
+
+    .price-final {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--maroon);
     }
 
     .dish-desc {
@@ -1145,6 +1421,14 @@
       gap: 20px;
       flex-wrap: wrap;
     }
+
+    .naan-strip .price-original,
+    .naan-strip .price-final {
+      font-size: inherit;
+      font-weight: inherit;
+      display: inline;
+    }
+
 
     .naan-strip .info {
       display: flex;
@@ -2923,6 +3207,189 @@
         min-height: 44px;
       }
     }
+  
+    /* =========================================================
+       REQUESTED CLEAN SECTIONS — FINAL OVERRIDE
+       Category Picker + Story + How It Works
+    ========================================================= */
+
+    /* CATEGORY PICKER: white background + black typography */
+    .cat-picker {
+      background: #ffffff !important;
+      color: #171310 !important;
+      border-bottom: 1px solid #e6e1d9 !important;
+    }
+
+    .cat-picker h2,
+    .cat-picker .cat-picker-sub,
+    .cat-picker .cat-tile,
+    .cat-picker .cat-tile-label {
+      color: #171310 !important;
+    }
+
+    .cat-picker .cat-picker-sub {
+      color: #4a4640 !important;
+    }
+
+    .cat-picker .cat-tile-photo {
+      background: #f7f5f1 !important;
+      border-color: #d9d3c9 !important;
+      box-shadow: 0 8px 20px -14px rgba(0, 0, 0, .3) !important;
+    }
+
+    .cat-picker .cat-tile:hover .cat-tile-photo,
+    .cat-picker .cat-tile:focus-visible .cat-tile-photo {
+      border-color: #c9962c !important;
+    }
+
+    /* STORY: white background + black/dark typography */
+    .story {
+      background: #ffffff !important;
+      color: #171310 !important;
+      border-top: 1px solid #eee9e1 !important;
+      border-bottom: 1px solid #eee9e1 !important;
+    }
+
+    .story-copy h2 {
+      color: #171310 !important;
+    }
+
+    .story-copy p,
+    .story-copy p.lead {
+      color: #4a4640 !important;
+    }
+
+    .story-copy p.lead {
+      color: #241d14 !important;
+    }
+
+    .story-stats {
+      border-top-color: #e4ddd3 !important;
+    }
+
+    .story-stats div span {
+      color: #4a4640 !important;
+    }
+
+    /* HOW IT WORKS: white background + black/dark typography */
+    .how {
+      background: #ffffff !important;
+      color: #171310 !important;
+      border-bottom: 1px solid #eee9e1 !important;
+    }
+
+    .how .section-title,
+    .how-card h4 {
+      color: #171310 !important;
+    }
+
+    .how-card p {
+      color: #4a4640 !important;
+    }
+
+    .how-card {
+      background: #ffffff !important;
+      border-color: #ded8cf !important;
+    }
+
+    .how-card:hover {
+      border-color: #c9962c !important;
+      box-shadow: 0 14px 30px -24px rgba(0, 0, 0, .3) !important;
+    }
+
+  
+    /* =========================================================
+       HEADER — LIGHT THEME
+       Keep the header clean, white and readable to match the
+       Category Picker / Story / How It Works sections.
+    ========================================================= */
+    .site-header {
+      background: rgba(255, 255, 255, .96) !important;
+      color: #171310 !important;
+      border-bottom: 1px solid #e3ddd4 !important;
+      box-shadow: 0 8px 24px -20px rgba(0, 0, 0, .28);
+    }
+
+    .site-header .brand-name,
+    .site-header .brand-name .big {
+      color: #171310 !important;
+    }
+
+    .site-header .brand-name .small {
+      color: #9c6a17 !important;
+    }
+
+    .site-header .main-nav a {
+      color: #3f3932 !important;
+    }
+
+    .site-header .main-nav a:hover,
+    .site-header .main-nav a.active {
+      color: #8e2323 !important;
+    }
+
+    .site-header .main-nav a::after {
+      background: #c9962c !important;
+    }
+
+    .site-header .icon-btn {
+      color: #171310 !important;
+      background: #faf8f4 !important;
+      border-color: #d9d1c4 !important;
+    }
+
+    .site-header .icon-btn:hover {
+      background: #f4eee4 !important;
+      border-color: #c9962c !important;
+    }
+
+    .site-header .cart-badge {
+      box-shadow: 0 0 0 2px #ffffff !important;
+    }
+
+    .site-header .nav-toggle {
+      color: #171310 !important;
+    }
+
+  
+    /* =========================================================
+       HERO BACKGROUND — CLEAN PREMIUM LIGHT TREATMENT
+       No food/samosa image; subtle warm ivory + gold atmosphere.
+    ========================================================= */
+    .hero {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(201, 150, 44, .10), transparent 30%),
+        radial-gradient(circle at 82% 72%, rgba(142, 35, 35, .07), transparent 34%),
+        linear-gradient(135deg, #ffffff 0%, #fbf8f2 52%, #f5eee3 100%) !important;
+      color: #171310 !important;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255,255,255,.75), transparent 48%);
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      color: #171310 !important;
+    }
+
+    .hero h1 em {
+      color: #8e2323 !important;
+    }
+
+    .hero-sub {
+      color: #4b463f !important;
+    }
+
   </style>
 </head>
 
@@ -2952,14 +3419,12 @@
 
       <nav class="main-nav" id="mainNav">
         <a href="#home">Home</a>
-        <a href="#menu">Menu</a>
+        <a href="#categories">Menu</a>
         <a href="#story">Our Story</a>
         <a href="#contact">Contact</a>
       </nav>
 
       <div class="header-actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle light and dark theme"
-          style="display: none;"></button>
         <button class="icon-btn" id="cartOpenBtn" aria-label="Open cart">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
             stroke-linejoin="round">
@@ -2972,6 +3437,34 @@
       </div>
     </div>
   </header>
+
+  <!-- ================= CATEGORY PICKER ================= -->
+  <section class="cat-picker" id="categories">
+    <div class="wrap">
+      <h2>Order our best food options</h2>
+      <p class="cat-picker-sub">Tap a category to see the full dishes inside it and add straight to your cart.</p>
+      <div class="cat-picker-grid" id="catPickerGrid"></div>
+    </div>
+  </section>
+
+    <!-- ================= MARQUEE ================= -->
+  <div class="strip">
+    <div class="strip-track" id="marqueeTrack"></div>
+  </div>
+
+
+  <!-- ================= POPULAR PICKS ================= -->
+  <section class="popular reveal" id="popular">
+    <div class="wrap">
+      <p class="eyebrow"><span class="diamond"></span> Customer Favourites <span class="diamond"></span></p>
+      <h2 class="section-title">Popular Picks</h2>
+      <p class="section-sub">A quick taste of what people order again and again — add straight to your cart from here,
+        or dive into the full menu below.</p>
+    </div>
+    <div class="popular-scroll" id="popularScroll"></div>
+  </section>
+
+
 
   <!-- ================= HERO ================= -->
   <section class="hero" id="home">
@@ -3040,21 +3533,6 @@
     </div>
   </section>
 
-  <!-- ================= MARQUEE ================= -->
-  <div class="strip">
-    <div class="strip-track" id="marqueeTrack"></div>
-  </div>
-
-  <!-- ================= POPULAR PICKS ================= -->
-  <section class="popular reveal" id="popular">
-    <div class="wrap">
-      <p class="eyebrow"><span class="diamond"></span> Customer Favourites <span class="diamond"></span></p>
-      <h2 class="section-title">Popular Picks</h2>
-      <p class="section-sub">A quick taste of what people order again and again — add straight to your cart from here,
-        or dive into the full menu below.</p>
-    </div>
-    <div class="popular-scroll" id="popularScroll"></div>
-  </section>
 
   <!-- ================= MENU ================= -->
   <section class="menu-section" id="menu">
@@ -3193,16 +3671,12 @@
           WhatsApp.</p>
         <table class="hours-table" id="hoursTable">
           <tr>
-            <td>Monday &ndash; Thursday</td>
-            <td>[Add hours]</td>
+            <td>Monday &ndash; Friday</td>
+            <td>1:00pm &ndash; 1:00am</td>
           </tr>
           <tr>
-            <td>Friday &ndash; Saturday</td>
-            <td>[Add hours]</td>
-          </tr>
-          <tr>
-            <td>Sunday</td>
-            <td>[Add hours]</td>
+            <td>Saturday &ndash; Sunday</td>
+            <td>1:00pm &ndash; 2:00am</td>
           </tr>
         </table>
       </div>
@@ -3261,6 +3735,26 @@
   </aside>
 
   <!-- ================= CHECKOUT MODAL ================= -->
+  <div class="modal" id="categoryModal">
+    <div class="modal-panel cat-modal-panel">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="modal-head">
+        <div>
+          <h3 id="categoryModalTitle">Category</h3>
+          <p id="categoryModalNote"></p>
+        </div>
+        <button class="modal-close" id="categoryModalCloseBtn" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="categoryModalBody"></div>
+    </div>
+  </div>
+
   <div class="modal" id="checkoutModal">
     <div class="modal-panel">
       <div class="sheet-handle" aria-hidden="true"></div>
@@ -3301,10 +3795,6 @@
               <input type="text" id="custPostcode" name="custPostcode" autocomplete="postal-code" required>
               <div class="field-error" id="err-custPostcode"></div>
             </div>
-            <div class="field">
-              <label for="custTime">Delivery Date &amp; Time</label>
-              <input type="datetime-local" id="custTime" name="custTime" autocomplete="off">
-            </div>
             <div class="field full">
               <label for="custNotes">Notes (allergies, spice level, instructions)</label>
               <textarea id="custNotes" name="custNotes" rows="2"></textarea>
@@ -3330,14 +3820,6 @@
                   <span>Pay with cash when your order arrives.</span>
                 </span>
               </label>
-              <label class="pay-option">
-                <input type="radio" name="paymentMethod" value="bank">
-                <span class="pay-option-radio"></span>
-                <span class="pay-option-body">
-                  <strong>🏦 Bank Transfer</strong>
-                  <span>Pay in advance by bank transfer.</span>
-                </span>
-              </label>
             </div>
 
             <div class="pay-box" id="bankDetailsBox" hidden>
@@ -3360,19 +3842,15 @@
           </div>
 
           <div class="checkout-actions">
-            <button type="button" class="btn wa-btn btn-block" id="sendWhatsApp">
+            <button type="button" class="btn wa-btn btn-block" id="confirmOrderBtn">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.78 14.13c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.51.32.07.12.07.68-.17 1.36z" />
               </svg>
-              Send Order via WhatsApp
+              Confirm Order — Send via WhatsApp &amp; Email
             </button>
-            <div class="row2">
-              <button type="button" class="btn btn-ghost btn-block" id="sendEmail">Send via Email</button>
-              <button type="button" class="btn btn-ghost btn-block" id="copyOrder">Copy Order Text</button>
-            </div>
-            <p class="copy-note">Sending your order opens WhatsApp or your email app with everything filled in &mdash;
-              just hit send.</p>
+            <p class="copy-note">Confirming will open WhatsApp and your email app, both pre-filled with your order
+              &mdash; just hit send in each.</p>
           </div>
         </form>
       </div>
@@ -3399,9 +3877,8 @@
       phoneDisplay: "+91 9328641633",
       deliveryArea: "Add your delivery postcodes / area here",
       hours: {
-        weekday: "5:00pm – 10:30pm",
-        weekend: "1:00pm – 11:00pm",
-        sunday: "1:00pm – 9:30pm"
+        weekday: "1:00pm – 1:00am",
+        weekend: "1:00pm – 2:00am"
       },
       bank: {
         accountName: "The Spice Kitchen Ltd",
@@ -3421,7 +3898,8 @@
           { id: "chilli-chicken", name: "Chilli Chicken", desc: "Crispy chicken tossed with fresh chilli, peppers & Indo-Chinese sauce.", price: 6.99, veg: false },
           { id: "chicken-manch", name: "Chicken Manchurian", desc: "Tender chicken tossed in a rich, tangy Manchurian gravy.", price: 6.99, veg: false },
           { id: "chicken-majestic", name: "Chicken Majestic", desc: "Crispy chicken strips tossed in a creamy, spicy house sauce.", price: 6.99, veg: false },
-          { id: "egg-bhaji", name: "Egg Bhaji", desc: "Fluffy scrambled egg cooked with onion, tomato & aromatic spices.", price: 1.99, veg: false }
+          { id: "egg-bhaji", name: "Egg Pakoda", desc: "Fluffy scrambled egg cooked with onion, tomato & aromatic spices.", price: 1.99, veg: false },
+          { id: "honey-chilli-potato", name: "Honey Chilli Potato", desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true }
         ]
       },
       {
@@ -3435,7 +3913,8 @@
           { id: "paneer-fried-rice", name: "Paneer Fried Rice", desc: "Fragrant rice tossed with golden paneer, vegetables & oriental sauces.", price: 6.99, veg: true },
           { id: "veg-manch-fried-rice", name: "Veg Manchurian Fried Rice", desc: "Wok-tossed fried rice topped with crispy vegetable Manchurian.", price: 6.49, veg: true },
           { id: "mushroom-rice", name: "Mushroom Rice", desc: "Fragrant rice tossed with juicy mushrooms, vegetables & aromatic seasoning.", price: 5.99, veg: true }
-        ]
+        ],
+        addon: { id: "chilli-garlic-friedrice", name: "Chilli Garlic 🌶️🌶️", desc: "Extra-hot chilli garlic seasoning stirred through your fried rice.", price: 0.50, veg: true }
       },
       {
         id: "noodles", label: "Noodles", num: "03",
@@ -3449,8 +3928,10 @@
           { id: "veg-manch-noodles", name: "Veg Manchurian Noodles", desc: "Wok-tossed noodles topped with crispy vegetable Manchurian.", price: 6.49, veg: true },
           { id: "mushroom-noodles", name: "Mushroom Noodles", desc: "Wok-tossed noodles with juicy mushrooms, vegetables & aromatic seasoning.", price: 5.99, veg: true },
           { id: "veg-hakka-noodles", name: "Veg Hakka Noodles", desc: "Classic Hakka-style noodles tossed with crisp vegetables & soy seasoning.", price: 5.99, veg: true },
-          { id: "chicken-hakka-noodles", name: "Chicken Hakka Noodles", desc: "Classic Hakka-style noodles wok-tossed with chicken & soy seasoning.", price: 6.99, veg: false }
-        ]
+          { id: "chicken-hakka-noodles", name: "Chicken Hakka Noodles", desc: "Classic Hakka-style noodles wok-tossed with chicken & soy seasoning.", price: 6.99, veg: false },
+          { id: "egg-hakka-noodles", name: "Egg Hakka Noodles", desc: "Classic Hakka-style noodles wok-tossed with fluffy egg & soy seasoning.", price: 6.49, veg: false }
+        ],
+        addon: { id: "chilli-garlic-noodles", name: "Chilli Garlic 🌶️🌶️", desc: "Extra-hot chilli garlic seasoning stirred through your noodles.", price: 0.50, veg: true }
       },
       {
         id: "curries", label: "Curries", num: "04",
@@ -3470,7 +3951,8 @@
               { id: "chicken-bhuna", name: "Chicken Bhuna", desc: "Tender chicken simmered in a thick, richly spiced onion-tomato masala.", price: 7.99, veg: false },
               { id: "chicken-butter-masala", name: "Chicken Butter Masala", desc: "Tender chicken in a rich buttery tomato gravy finished with cream.", price: 7.99, veg: false },
               { id: "chicken-karai", name: "Chicken Karai", desc: "Tender chicken cooked with peppers, tomato, onion & bold kadai spices.", price: 7.99, veg: false },
-              { id: "egg-kari", name: "Egg Kari", desc: "Boiled eggs simmered in a rich, aromatic onion-tomato curry.", price: 6.99, veg: false }
+              { id: "egg-kari", name: "Egg Kari", desc: "Boiled eggs simmered in a rich, aromatic onion-tomato curry.", price: 6.99, veg: false },
+              { id: "spice-special-egg-curry", name: "Spice Special Egg Curry", desc: "Our house-special egg curry, simmered in a rich, bold masala gravy.", price: 7.49, veg: false }
             ]
           }
         ]
@@ -3486,14 +3968,13 @@
           { id: "dal", name: "Dal", desc: "Homestyle lentils slow-cooked with aromatic spices & a traditional tadka.", price: 5.99, veg: true },
           { id: "plain-rice", name: "Plain Rice", desc: "Fluffy steamed basmati rice, perfect with any curry.", price: 4.99, veg: true },
           { id: "jeera-rice", name: "Jeera Rice", desc: "Fragrant basmati rice tempered with roasted cumin & ghee.", price: 5.99, veg: true }
-        ]
+        ],
+        addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature — perfect with your Amritsari Chole Bhature.", price: 1.99, veg: true }
       },
       {
         id: "specials", label: "Chef's Specials", num: "06",
         note: "Signature dishes you won't find on every menu.",
         items: [
-          { id: "thecha-rice", name: "Thecha Rice", desc: "Fragrant rice tossed through our fiery homestyle green chilli & garlic thecha.", price: 7.49, veg: true },
-          { id: "thecha-noodles", name: "Thecha Noodles", desc: "Wok-tossed noodles finished with our fiery homestyle green chilli & garlic thecha.", price: 7.49, veg: true },
           { id: "spice-special-paneer-masala", name: "The Spice Special Paneer Masala", desc: "Our house-special paneer curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: true },
           { id: "spice-special-chicken-masala", name: "The Spice Special Chicken Masala", desc: "Our house-special chicken curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: false },
           { id: "ghee-pepper-papadam-curry", name: "Ghee Pepper Papadam Curry", desc: "Crisp papadam simmered in a peppery ghee-roasted curry, finished with cracked pepper.", price: 6.99, veg: true },
@@ -3508,8 +3989,9 @@
           { id: "french-fries", name: "French Fries 🍟", desc: "Golden, crispy fries, lightly salted.", price: 2.99, veg: true },
           { id: "loaded-cheese-fries", name: "Loaded Cheese French Fries", desc: "Crispy fries loaded with melted cheese.", price: 4.49, veg: true },
           { id: "peri-peri-chips", name: "Peri Peri Chips", desc: "Crispy chips tossed in a bold, tangy peri peri seasoning.", price: 3.49, veg: true },
-          { id: "honey-chilli-potato", name: "Honey Chilli Potato", desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true },
-          { id: "papadam-2pc", name: "Papadam (2pcs)", desc: "Crisp, roasted papadam, served plain.", price: 1.99, veg: true }
+          { id: "papadam-2pc", name: "Papadam (2pcs)", desc: "Crisp, roasted papadam, served plain.", price: 1.99, veg: true },
+          { id: "chicken-samosa-3pc", name: "Chicken Samosa (3 pcs)", desc: "Crispy pastry parcels filled with a savoury spiced chicken filling.", price: 3.49, veg: false },
+          { id: "veg-samosa-3pc", name: "Veg Samosa (3 pcs)", desc: "Crispy pastry parcels filled with a savoury spiced vegetable filling.", price: 3.49, veg: true }
         ]
       },
       {
@@ -3523,16 +4005,10 @@
         addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature to your order.", price: 1.99, veg: true }
       },
       {
-        id: "desserts", label: "Desserts", num: "09",
-        note: "A sweet finish to your meal.",
+        id: "desserts", label: "Sweets & Lassi", num: "09",
+        note: "A sweet finish, chilled or warm.",
         items: [
-          { id: "gulab-jamun", name: "Gulab Jamun (3pcs)", desc: "Soft milk dumplings soaked in warm rose & cardamom syrup.", price: 2.99, veg: true }
-        ]
-      },
-      {
-        id: "drinks", label: "Drinks", num: "10",
-        note: "Cool, creamy, and made fresh.",
-        items: [
+          { id: "gulab-jamun", name: "Gulab Jamun (3pcs)", desc: "Soft milk dumplings soaked in warm rose & cardamom syrup.", price: 2.99, veg: true },
           { id: "salted-lassi", name: "Salted Lassi", desc: "Chilled, churned yoghurt drink, lightly salted.", price: 1.99, veg: true },
           { id: "sweet-lassi", name: "Sweet Lassi", desc: "Chilled, churned yoghurt drink, lightly sweetened.", price: 2.99, veg: true },
           { id: "mango-lassi", name: "Mango Lassi", desc: "Chilled, churned yoghurt drink blended with sweet mango.", price: 3.99, veg: true }
@@ -3556,6 +4032,12 @@
     const fmt = n => "£" + n.toFixed(2);
     const $ = sel => document.querySelector(sel);
     const $all = sel => Array.from(document.querySelectorAll(sel));
+
+    /* All prices in MENU are shown struck-through as the "before discount" price;
+       customers are actually charged this DISCOUNT_RATE% off. */
+    const DISCOUNT_RATE = 0.25;
+    const discountedPrice = price => Math.round(price * (1 - DISCOUNT_RATE) * 100) / 100;
+    const priceOf = id => discountedPrice(ITEM_INDEX[id].price);
 
     function vegIconSVG(isVeg) {
       return isVeg
@@ -3598,7 +4080,7 @@
     <div class="dish-content">
       <div class="dish-top">
         <div class="dish-title-row">${vegIconSVG(item.veg)}<span class="dish-name">${item.name}</span></div>
-        <span class="dish-price">${fmt(item.price)}</span>
+        <span class="dish-price"><s class="price-original">${fmt(item.price)}</s><span class="price-final">${fmt(discountedPrice(item.price))}</span></span>
       </div>
       <p class="dish-desc">${item.desc}</p>
       <div class="dish-bottom">
@@ -3629,8 +4111,64 @@
       <span class="qty-val">${qty}</span>
       <button type="button" class="qty-plus" aria-label="Increase quantity">+</button>
     </div>
-    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · ${fmt(addon.price)}</button>
+    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <s class="price-original">${fmt(addon.price)}</s> <span class="price-final">${fmt(discountedPrice(addon.price))}</span></button>
   </div>`;
+    }
+
+    /* image shown on each round category tile / modal header */
+    const CAT_TILE_IMAGES = {
+      starters: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80",
+      "fried-rice": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80",
+      noodles: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=300&q=80",
+      curries: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=300&q=80",
+      "dal-rice": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=300&q=80",
+      specials: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=300&q=80",
+      sides: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=300&q=80",
+      breads: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80",
+      desserts: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=300&q=80"
+    };
+
+    function renderCategoryPicker() {
+      const grid = $("#catPickerGrid");
+      grid.innerHTML = MENU.map(cat => `
+    <button type="button" class="cat-tile" data-cat="${cat.id}">
+      <span class="cat-tile-photo"><img src="${CAT_TILE_IMAGES[cat.id] || FOOD_IMAGES.default}" alt="${cat.label}" loading="lazy"></span>
+      <span class="cat-tile-label">${cat.label}</span>
+    </button>`).join("");
+
+      $all(".cat-tile", grid).forEach(tile => {
+        tile.addEventListener("click", () => openCategoryModal(tile.dataset.cat));
+      });
+    }
+
+    function categoryBodyHTML(cat) {
+      let body = "";
+      if (cat.items) {
+        body = `<div class="menu-grid">${cat.items.map(it => dishCard(it, false)).join("")}</div>`;
+      } else if (cat.subgroups) {
+        body = cat.subgroups.map(sg => `
+      <p class="menu-subhead">${sg.label}</p>
+      <div class="menu-grid">${sg.items.map(it => dishCard(it, false)).join("")}</div>
+    `).join("");
+      }
+      if (cat.addon) body += addonStrip(cat.addon);
+      return body;
+    }
+
+    function openCategoryModal(catId) {
+      const cat = MENU.find(c => c.id === catId);
+      if (!cat) return;
+      $("#categoryModalTitle").textContent = cat.label;
+      $("#categoryModalNote").textContent = cat.note || "";
+      $("#categoryModalBody").innerHTML = categoryBodyHTML(cat);
+      bindMenuEvents();
+      $("#categoryModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCategoryModal() {
+      $("#categoryModal").classList.remove("show");
+      document.body.style.overflow = "";
     }
 
     function renderMenu() {
@@ -3661,7 +4199,7 @@
     }
 
     /* ---------------- POPULAR PICKS ---------------- */
-    const POPULAR_IDS = ["chicken-bhuna", "dragon-paneer", "thecha-noodles", "cheese-anguri", "chicken-majestic", "mango-lassi"];
+    const POPULAR_IDS = ["chicken-bhuna", "dragon-paneer", "spice-special-egg-curry", "cheese-anguri", "chicken-majestic", "mango-lassi"];
 
     function renderPopular() {
       const mount = $("#popularScroll");
@@ -3737,7 +4275,7 @@
 
     /* ---------------- CART DRAWER ---------------- */
     function cartCount() { return Object.values(cart).reduce((a, b) => a + b, 0); }
-    function cartTotal() { return Object.entries(cart).reduce((sum, [id, qty]) => sum + ITEM_INDEX[id].price * qty, 0); }
+    function cartTotal() { return Object.entries(cart).reduce((sum, [id, qty]) => sum + priceOf(id) * qty, 0); }
 
     function renderCart() {
       const itemsEl = $("#cartItems");
@@ -3757,14 +4295,15 @@
       } else {
         itemsEl.innerHTML = entries.map(([id, qty]) => {
           const item = ITEM_INDEX[id];
+          const unit = priceOf(id);
           return `
       <div class="cart-line" data-id="${id}">
         <div class="cart-line-info">
           <strong>${item.name}</strong>
-          <span>${fmt(item.price)} each</span>
+          <span>${fmt(unit)} each</span>
         </div>
         <div class="cart-line-right">
-          <span class="cart-line-price">${fmt(item.price * qty)}</span>
+          <span class="cart-line-price">${fmt(unit * qty)}</span>
           <div class="qty-stepper" data-id="${id}">
             <button type="button" class="qty-minus" aria-label="Decrease quantity">−</button>
             <span class="qty-val">${qty}</span>
@@ -3799,15 +4338,22 @@
       const entries = Object.entries(cart);
       lines.innerHTML = entries.map(([id, qty]) => {
         const item = ITEM_INDEX[id];
-        return `<div class="recap-line"><span>${item.name} × ${qty}</span><span>${fmt(item.price * qty)}</span></div>`;
+        return `<div class="recap-line"><span>${item.name} × ${qty}</span><span>${fmt(priceOf(id) * qty)}</span></div>`;
       }).join("");
       $("#recapTotal").textContent = fmt(cartTotal());
+    }
+
+    let currentOrderId = null;
+    function ensureOrderId() {
+      if (!currentOrderId) currentOrderId = "TSK-" + Date.now().toString(36).toUpperCase();
+      return currentOrderId;
     }
 
     function openCheckout() {
       if (cartCount() === 0) return;
       closeNav();
       closeCart();
+      currentOrderId = null; // fresh order id for this checkout session
       $("#checkoutModal").classList.add("show");
       document.body.style.overflow = "hidden";
     }
@@ -3871,45 +4417,93 @@
       });
     }
 
-    function buildOrderText() {
-      const name = $("#custName").value.trim();
-      const phone = $("#custPhone").value.trim();
-      const address = $("#custAddress").value.trim();
-      const postcode = $("#custPostcode").value.trim();
-      const time = formatDeliveryDateTime($("#custTime").value);
-      const notes = $("#custNotes").value.trim();
-      const method = getPaymentMethod();
-      const methodLabel = method === "bank" ? "Bank Transfer (in advance)" : "Cash on Delivery";
+    function buildOrderFields() {
+      return {
+        name: $("#custName").value.trim(),
+        phone: $("#custPhone").value.trim(),
+        address: $("#custAddress").value.trim(),
+        postcode: $("#custPostcode").value.trim(),
+        time: formatDeliveryDateTime($("#custTime").value),
+        notes: $("#custNotes").value.trim(),
+        method: getPaymentMethod()
+      };
+    }
 
-      let lines = [];
-      lines.push("🍛 NEW ORDER — The Spice Kitchen");
-      lines.push("");
-      lines.push("Customer: " + name);
-      lines.push("Phone: " + phone);
-      lines.push("Address: " + address + ", " + postcode);
-      if (time) lines.push("Preferred time: " + time);
-      lines.push("");
-      lines.push("Order:");
-      Object.entries(cart).forEach(([id, qty]) => {
+    /* WhatsApp supports *bold* / _italic_ formatting, so the message is
+       structured with clear section headers and dividers for a professional look. */
+    function buildWhatsAppMessage() {
+      const f = buildOrderFields();
+      const methodLabel = f.method === "bank" ? "Bank Transfer (in advance)" : "Cash on Delivery";
+      const orderId = ensureOrderId();
+      const divider = "───────────────────";
+
+      const lines = [];
+      lines.push("🍛 *THE SPICE KITCHEN*");
+      lines.push("*New Order Confirmation*");
+      lines.push(`Order ID: *${orderId}*`);
+      lines.push(divider);
+      lines.push("*👤 Customer Details*");
+      lines.push(`Name: ${f.name}`);
+      lines.push(`Phone: ${f.phone}`);
+      lines.push(`Address: ${f.address}, ${f.postcode}`);
+      if (f.time) lines.push(`Preferred Delivery: ${f.time}`);
+      lines.push(divider);
+      lines.push("*🧾 Order Summary*");
+      Object.entries(cart).forEach(([id, qty], i) => {
         const item = ITEM_INDEX[id];
-        lines.push(`• ${item.name} × ${qty} — ${fmt(item.price * qty)}`);
+        lines.push(`${i + 1}. ${item.name}  ×${qty}  —  ${fmt(priceOf(id) * qty)}`);
       });
-      lines.push("");
+      lines.push(divider);
+      lines.push(`*Total: ${fmt(cartTotal())}*`);
+      lines.push(`Payment Method: *${methodLabel}*`);
+      if (f.method === "bank") lines.push(`Reference: ${f.name}`);
+      if (f.notes) { lines.push(divider); lines.push(`*📝 Notes:* ${f.notes}`); }
+      lines.push(divider);
+      lines.push("Thank you for choosing The Spice Kitchen! 🙏");
+      lines.push("We'll confirm your order shortly.");
+      return lines.join("\n");
+    }
+
+    /* Plain-text version for email clients that don't render WhatsApp-style markdown. */
+    function buildEmailMessage() {
+      const f = buildOrderFields();
+      const methodLabel = f.method === "bank" ? "Bank Transfer (in advance)" : "Cash on Delivery";
+      const orderId = ensureOrderId();
+      const divider = "----------------------------------------";
+
+      const lines = [];
+      lines.push("THE SPICE KITCHEN — NEW ORDER CONFIRMATION");
+      lines.push("Order ID: " + orderId);
+      lines.push(divider);
+      lines.push("CUSTOMER DETAILS");
+      lines.push("Name: " + f.name);
+      lines.push("Phone: " + f.phone);
+      lines.push("Address: " + f.address + ", " + f.postcode);
+      if (f.time) lines.push("Preferred Delivery: " + f.time);
+      lines.push(divider);
+      lines.push("ORDER SUMMARY");
+      Object.entries(cart).forEach(([id, qty], i) => {
+        const item = ITEM_INDEX[id];
+        lines.push((i + 1) + ". " + item.name + "  x" + qty + "  —  " + fmt(priceOf(id) * qty));
+      });
+      lines.push(divider);
       lines.push("Total: " + fmt(cartTotal()));
-      if (notes) { lines.push(""); lines.push("Notes: " + notes); }
-      lines.push("");
       lines.push("Payment Method: " + methodLabel);
-      if (method === "bank") lines.push("(Bank details to be confirmed / already shared. Reference: " + name + ")");
+      if (f.method === "bank") lines.push("Reference: " + f.name);
+      if (f.notes) { lines.push(divider); lines.push("Notes: " + f.notes); }
+      lines.push(divider);
+      lines.push("Thank you for choosing The Spice Kitchen!");
+      lines.push("We'll confirm your order shortly.");
       return lines.join("\n");
     }
 
     function getTrackingData() {
       const params = new URLSearchParams(window.location.search);
       const entries = Object.entries(cart).map(([id, qty]) => ({
-        id, name: ITEM_INDEX[id]?.name || id, quantity: qty, price: ITEM_INDEX[id]?.price || 0
+        id, name: ITEM_INDEX[id]?.name || id, quantity: qty, price: ITEM_INDEX[id] ? priceOf(id) : 0
       }));
       return {
-        orderId: "TSK-" + Date.now().toString(36).toUpperCase(),
+        orderId: ensureOrderId(),
         timestamp: new Date().toISOString(),
         customerName: $("#custName").value.trim(),
         phone: $("#custPhone").value.trim(),
@@ -3943,25 +4537,28 @@
       }
     }
 
-    async function sendWhatsApp() {
+    /* Sends the order via WhatsApp AND opens the email client at the same time. */
+    async function confirmOrder() {
       if (!validateForm()) return;
       await trackOrder();
-      const text = encodeURIComponent(buildOrderText());
-      const number = CONFIG.whatsappNumber.replace(/[^\d]/g, "");
-      window.open(`https://wa.me/${number}?text=${text}`, "_blank");
-    }
 
-    async function sendEmail() {
-      if (!validateForm()) return;
-      await trackOrder();
+      const waText = encodeURIComponent(buildWhatsAppMessage());
+      const number = CONFIG.whatsappNumber.replace(/[^\d]/g, "");
+      window.open(`https://wa.me/${number}?text=${waText}`, "_blank");
+
       const subject = encodeURIComponent("New Order — The Spice Kitchen (" + $("#custName").value.trim() + ")");
-      const body = encodeURIComponent(buildOrderText());
-      window.location.href = `mailto:${CONFIG.email}?subject=${subject}&body=${body}`;
+      const body = encodeURIComponent(buildEmailMessage());
+      // slight delay so the WhatsApp tab opens cleanly before the mail client takes over
+      setTimeout(() => {
+        window.location.href = `mailto:${CONFIG.email}?subject=${subject}&body=${body}`;
+      }, 400);
+
+      showToast("Order sent — WhatsApp & Email opened");
     }
 
     function copyOrder() {
       if (!validateForm()) return;
-      navigator.clipboard.writeText(buildOrderText()).then(() => {
+      navigator.clipboard.writeText(buildEmailMessage()).then(() => {
         showToast("Order copied to clipboard");
       }).catch(() => {
         showToast("Could not copy — please select and copy manually");
@@ -4026,27 +4623,9 @@
       window.addEventListener("resize", () => { if (window.innerWidth > 760) closeNav(); });
     }
 
-    /* ---------------- THEME TOGGLE ---------------- */
-    const SUN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>';
-    const MOON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
-
-    function getTheme() {
-      return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-    }
-    function setTheme(theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-      $("#themeToggle").innerHTML = theme === "light" ? MOON_SVG : SUN_SVG;
-      $("#themeToggle").setAttribute("aria-label", theme === "light" ? "Switch to dark theme" : "Switch to light theme");
-      try { localStorage.setItem("tsk-theme", theme); } catch (e) { /* storage unavailable — theme still applies for this session */ }
-    }
+    /* ---------------- THEME (dark-only) ---------------- */
     function initTheme() {
-      let saved = null;
-      try { saved = localStorage.getItem("tsk-theme"); } catch (e) { }
-      if (!saved && window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
-        saved = "light";
-      }
-      setTheme(saved === "light" ? "light" : "dark");
-      $("#themeToggle").addEventListener("click", () => setTheme(getTheme() === "light" ? "dark" : "light"));
+      document.documentElement.setAttribute("data-theme", "dark");
     }
 
     /* ---------------- CONFIG INTO DOM ---------------- */
@@ -4056,9 +4635,8 @@
       $("#areaDisplay").textContent = CONFIG.deliveryArea;
       $("#waDisplay").textContent = "+" + CONFIG.whatsappNumber.replace(/[^\d]/g, "");
       $("#hoursTable").innerHTML = `
-    <tr><td>Monday &ndash; Thursday</td><td>${CONFIG.hours.weekday}</td></tr>
-    <tr><td>Friday &ndash; Saturday</td><td>${CONFIG.hours.weekend}</td></tr>
-    <tr><td>Sunday</td><td>${CONFIG.hours.sunday}</td></tr>`;
+    <tr><td>Monday &ndash; Friday</td><td>${CONFIG.hours.weekday}</td></tr>
+    <tr><td>Saturday &ndash; Sunday</td><td>${CONFIG.hours.weekend}</td></tr>`;
       $(".pay-grid").innerHTML = `
     <div><strong>Account Name</strong>${CONFIG.bank.accountName}</div>
     <div><strong>Sort Code</strong>${CONFIG.bank.sortCode}</div>
@@ -4071,6 +4649,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       initTheme();
       applyConfig();
+      renderCategoryPicker();
       renderMenu();
       renderPopular();
       renderMarquee();
@@ -4094,8 +4673,9 @@
       $("#overlay").addEventListener("click", () => { closeCart(); closeCheckout(); closeNav(); });
       $("#checkoutBtn").addEventListener("click", openCheckout);
       $("#modalCloseBtn").addEventListener("click", closeCheckout);
-      $("#sendWhatsApp").addEventListener("click", sendWhatsApp);
-      $("#sendEmail").addEventListener("click", sendEmail);
+      $("#categoryModalCloseBtn").addEventListener("click", closeCategoryModal);
+      $("#categoryModal").addEventListener("click", (e) => { if (e.target.id === "categoryModal") closeCategoryModal(); });
+      $("#confirmOrderBtn").addEventListener("click", confirmOrder);
       $("#copyOrder").addEventListener("click", copyOrder);
 
       const vegSwitch = $("#vegSwitch");
@@ -4109,7 +4689,7 @@
       vegSwitch.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleVeg(); } });
 
       document.addEventListener("keydown", e => {
-        if (e.key === "Escape") { closeCart(); closeCheckout(); closeNav(); }
+        if (e.key === "Escape") { closeCart(); closeCheckout(); closeCategoryModal(); closeNav(); }
       });
     });
   </script>
