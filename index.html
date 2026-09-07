@@ -3878,6 +3878,10 @@
               <div class="field-error" id="err-custPostcode"></div>
             </div>
             <div class="field full">
+              <label for="custTime">Preferred Delivery Time (optional)</label>
+              <input type="datetime-local" id="custTime" name="custTime">
+            </div>
+            <div class="field full">
               <label for="custNotes">Notes (allergies, spice level, instructions)</label>
               <textarea id="custNotes" name="custNotes" rows="2"></textarea>
             </div>
@@ -3980,7 +3984,7 @@
           { id: "chilli-chicken", name: "Chilli Chicken", desc: "Crispy chicken tossed with fresh chilli, peppers & Indo-Chinese sauce.", price: 6.99, veg: false },
           { id: "chicken-manch", name: "Chicken Manchurian", desc: "Tender chicken tossed in a rich, tangy Manchurian gravy.", price: 6.99, veg: false },
           { id: "chicken-majestic", name: "Dragon Chicken", desc: "Crispy chicken strips tossed in a creamy, spicy house sauce.", price: 6.99, veg: false },
-          { id: "egg-bhaji", name: "Egg Pakoda", desc: "Fluffy scrambled egg cooked with onion, tomato & aromatic spices.", price: 1.99, veg: false },
+          { id: "egg-bhaji", name: "Egg Pakoda", desc: "Hard-boiled eggs coated in a thick, seasoned chickpea flour (gram flour/besan) batter and deep-fried until golden brown and intensely crispy.", price: 1.99, veg: false },
           { id: "honey-chilli-potato", name: "Honey Chilli Potato", desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true },
           { id: "dragon-paneer", name: "Dragon Paneer", desc: "Crispy paneer tossed in a fiery, tangy dragon sauce with peppers & spring onion.", price: 6.99, veg: true }
         ]
@@ -4026,7 +4030,8 @@
               { id: "kadai-paneer", name: "Kadai Paneer", desc: "Paneer cooked with peppers, onion & freshly ground kadai spices.", price: 7.99, veg: true },
               { id: "sev-tamatar", name: "Sev Tamatar", desc: "Tangy tomato gravy topped with crispy sev & aromatic Indian spices.", price: 6.99, veg: true },
               { id: "bhindi-masala", name: "Bhindi Masala", desc: "Tender okra cooked with onion, tomato & traditional Indian spices.", price: 6.99, veg: true },
-              { id: "rajma", name: "Rajma", desc: "Slow-cooked kidney beans in a rich, homestyle onion-tomato gravy.", price: 6.99, veg: true }
+              { id: "rajma", name: "Rajma", desc: "Slow-cooked kidney beans in a rich, homestyle onion-tomato gravy.", price: 6.99, veg: true },
+              { id: "amritsari-chole-bhature", name: "Amritsari Chole Bhature", desc: "Slow-cooked chickpeas in a bold Amritsari masala, served with fluffy fried bhature.", price: 7.99, veg: true }
             ]
           },
           {
@@ -4038,7 +4043,8 @@
               { id: "spice-special-egg-curry", name: "Spice Special Egg Curry", desc: "Our house-special egg curry, simmered in a rich, bold masala gravy.", price: 7.49, veg: false }
             ]
           }
-        ]
+        ],
+        addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature — perfect with your Amritsari Chole Bhature.", price: 1.99, veg: true }
       },
       {
         id: "dal-rice", label: "Dal & Rice", num: "05",
@@ -4046,13 +4052,11 @@
         items: [
           { id: "rajma-chawal", name: "Rajma Chawal", desc: "Comforting rajma served with fragrant steamed basmati rice.", price: 7.99, veg: true },
           { id: "chole-chawal", name: "Chole Chawal", desc: "Spiced Amritsari chole served with fluffy basmati rice.", price: 7.99, veg: true },
-          { id: "amritsari-chole-bhature", name: "Amritsari Chole Bhature", desc: "Slow-cooked chickpeas in a bold Amritsari masala, served with fluffy fried bhature.", price: 7.99, veg: true },
           { id: "jeera-dal-tadka", name: "Jeera Rice & Dal Tadka", desc: "Fragrant cumin rice served with creamy dal finished with a sizzling tadka.", price: 6.99, veg: true },
-          { id: "dal", name: "Dal", desc: "Homestyle lentils slow-cooked with aromatic spices & a traditional tadka.", price: 5.99, veg: true },
+          { id: "dal", name: "Dal Tadka", desc: "Homestyle lentils slow-cooked with aromatic spices & a traditional tadka.", price: 5.99, veg: true },
           { id: "plain-rice", name: "Plain Rice", desc: "Fluffy steamed basmati rice, perfect with any curry.", price: 4.99, veg: true },
           { id: "jeera-rice", name: "Jeera Rice", desc: "Fragrant basmati rice tempered with roasted cumin & ghee.", price: 5.99, veg: true }
-        ],
-        addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature — perfect with your Amritsari Chole Bhature.", price: 1.99, veg: true }
+        ]
       },
       {
         id: "specials", label: "Chef's Specials", num: "06",
@@ -4136,11 +4140,11 @@
       "p-chilli": "assets/Paneer chili.jpg.jpeg",
       "veg-manch": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Manchurian.jpg",
       "chilli-chicken": "assets/Chili chiken.jpg.jpeg",
-      "chicken-manch": "assets/veg-manchurian-dry.webp",
+      "chicken-manch": "assets/Chiken manchurian .jpg.jpeg",
       "chicken-majestic": "https://jeyporedukaan.in/wp-content/uploads/2024/02/dragon_chicken_dry_version_featured-jpg.webp",
       "egg-bhaji": "assets/egg-pakoda-.jpg.jpeg",
       "honey-chilli-potato": "https://static.toiimg.com/thumb/52532656.cms?height=340&imgsize=498654&width=509",
-      "dragon-paneer": "assets/Paneer chili.jpg.jpeg",
+      "dragon-paneer": "assets/Dragon paneer .jpeg",
 
       "veg-fried-rice": "assets/Veg fried rice.jpg.jpeg",
       "chicken-fried-rice": "assets/Final Chiken fried rice .jpg.jpeg",
@@ -4151,12 +4155,12 @@
       "mushroom-rice": "assets/mushroom-rice-.jpg.jpeg",
 
       "veg-noodles": "assets/veg noodles-recipe-9.jpg.jpeg",
-      "chicken-noodles": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Chicken_noodles.jpg",
+      "chicken-noodles": "assets/Chicken noodles.png",
       "cegg-noodles": "https://d3s8tbcesxr4jm.cloudfront.net/recipe-images/v4/chicken-and-egg-noodles-stir-fry/3_medium.jpg",
       "egg-noodles": "assets/Egg noodles .jpg.jpeg",
       "paneer-noodles": "assets/Paneer noodles .jpg.jpeg",
       "veg-manch-noodles": "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto%2Cw_300%2Ch_300%2Ce_grayscale%2Cc_fit/FOOD_CATALOG/IMAGES/CMS/2026/1/5/1fb420be-f4df-4f1f-8d95-00fb2d924eb2_ee85e9cb-07be-47d9-ac8b-8844b255f3e2.jpg",
-      "mushroom-noodles": "assets/veg-manchurian-dry.webp",
+      "mushroom-noodles": "assets/mushroom-chow-mein-01.jpg.jpeg",
       "veg-hakka-noodles": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Veg_Hakka_Noodles.jpg",
       "chicken-hakka-noodles": "https://151408617.cdn6.editmysite.com/uploads/1/5/1/4/151408617/A7M6VWECOMWXUMX3QB5NAPN6.jpeg?optimize=medium&width=2400",
       "egg-hakka-noodles": "assets/EggNoodles5.jpg.jpeg",
@@ -4166,7 +4170,7 @@
       "sev-tamatar": "assets/sev-tamatar-sabzi.jpg.jpeg",
       "bhindi-masala": "https://upload.wikimedia.org/wikipedia/commons/2/22/Bhindi_Masala.jpg",
       "rajma": "assets/Rajma-Masala.jpg.jpeg",
-      "chicken-bhuna": "assets/Eggs-Makhani-.jpg.jpeg",
+      "chicken-bhuna": "assets/Chiken bhuna masala .webp",
       "chicken-butter-masala": "assets/Butter-Chicken-1.jpg.jpeg",
       "chicken-karai": "assets/Kadai chiken.jpg.jpeg",
       "egg-kari": "assets/EggMasala4.jpg.jpeg",
@@ -4181,8 +4185,8 @@
       "jeera-rice": "assets/Jeera rice.jpg.jpeg",
       "extra-bhature": "assets/Extra Bhatura.jpg.jpeg",
 
-      "spice-special-paneer-masala": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dhaba_Style_Paneer_Masala.jpg",
-      "spice-special-chicken-masala": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chicken_Masala_Indian_Dish.jpg",
+      "spice-special-paneer-masala": "assets/Spice sepcial panner masala-3.jpg.jpeg",
+      "spice-special-chicken-masala": "assets/Spice special CHICKEN masalaWebsite.jpg.jpeg",
       "ghee-pepper-papadam-curry": "assets/Pappadam curry.jpg.jpeg",
       "cheese-anguri": "assets/Cheese anguri.jpg.jpeg",
 
@@ -4191,11 +4195,11 @@
       "peri-peri-chips": "assets/Peri peri french fries .jpeg",
       "papadam-2pc": "assets/Pappadam.webp",
       "chicken-samosa-3pc": "assets/chickensamosa1-1(1).jpg.jpeg",
-      "veg-samosa-3pc": "assets/Veg-Hakka-samosa....jpg.jpeg",
+      "veg-samosa-3pc": "assets/Veg samosa1(1).jpg.jpeg",
 
       "butter-naan": "https://upload.wikimedia.org/wikipedia/commons/7/79/Butter_Naan.jpg",
       "garlic-naan": "assets/Garlic-Naan.jpg.jpeg",
-      "bhature": "assets/8-2.jpg.jpeg",
+      "bhature": "assets/Extra Bhatura.jpg.jpeg",
 
       "gulab-jamun": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Gulab_Jamuns.jpg",
       "salted-lassi": "assets/Salted lassi.jpg.jpeg",
@@ -4699,10 +4703,12 @@
       }
     }
 
-    /* Sends the order via WhatsApp AND opens the email client at the same time. */
-    async function confirmOrder() {
+    /* Sends the order via WhatsApp AND opens the email client at the same time.
+       window.open()/location.href must run synchronously inside the click handler —
+       any `await` before them (e.g. the tracking fetch) makes browsers treat the
+       user gesture as expired and silently block the WhatsApp tab / mail launch. */
+    function confirmOrder() {
       if (!validateForm()) return;
-      await trackOrder();
 
       const waText = encodeURIComponent(buildWhatsAppMessage());
       const number = CONFIG.whatsappNumber.replace(/[^\d]/g, "");
@@ -4710,12 +4716,11 @@
 
       const subject = encodeURIComponent("New Order — The Spice Kitchen (" + $("#custName").value.trim() + ")");
       const body = encodeURIComponent(buildEmailMessage());
-      // slight delay so the WhatsApp tab opens cleanly before the mail client takes over
-      setTimeout(() => {
-        window.location.href = `mailto:${CONFIG.email}?subject=${subject}&body=${body}`;
-      }, 400);
+      window.location.href = `mailto:${CONFIG.email}?subject=${subject}&body=${body}`;
 
       showToast("Order sent — WhatsApp & Email opened");
+
+      trackOrder();
     }
 
     function copyOrder() {
@@ -4838,7 +4843,8 @@
       $("#categoryModalCloseBtn").addEventListener("click", closeCategoryModal);
       $("#categoryModal").addEventListener("click", (e) => { if (e.target.id === "categoryModal") closeCategoryModal(); });
       $("#confirmOrderBtn").addEventListener("click", confirmOrder);
-      $("#copyOrder").addEventListener("click", copyOrder);
+      const copyOrderBtn = $("#copyOrder");
+      if (copyOrderBtn) copyOrderBtn.addEventListener("click", copyOrder);
 
       const vegSwitch = $("#vegSwitch");
       function toggleVeg() {
