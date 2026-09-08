@@ -3902,8 +3902,8 @@
                 <input type="radio" name="paymentMethod" value="cod" checked>
                 <span class="pay-option-radio"></span>
                 <span class="pay-option-body">
-                  <strong>💵 Cash on Delivery</strong>
-                  <span>Pay with cash when your order arrives.</span>
+                  <strong>💵 PAY ON DELIVERY</strong>
+                  <span>(pay with card &amp; cash, when your order arrives)</span>
                 </span>
               </label>
             </div>
@@ -3921,9 +3921,8 @@
             </div>
 
             <div class="pay-box cod-box" id="codDetailsBox">
-              <h4>💵 Cash on Delivery</h4>
-              <p class="hint">Have the total amount ready in cash for our delivery rider. That's it — no advance payment
-                needed.</p>
+              <h4>💵 PAY ON DELIVERY</h4>
+              <p class="hint">Pay with card &amp; cash, when your order arrives.</p>
             </div>
           </div>
 
@@ -3990,21 +3989,7 @@
         ]
       },
       {
-        id: "fried-rice", label: "Fried Rice", num: "02",
-        note: "Fragrant basmati, wok-tossed to order.",
-        items: [
-          { id: "veg-fried-rice", name: "Veg Fried Rice", desc: "Fragrant rice wok-tossed with garden vegetables & oriental seasoning.", price: 5.99, veg: true },
-          { id: "chicken-fried-rice", name: "Chicken Fried Rice", desc: "Fragrant rice wok-tossed with tender chicken & fresh vegetables.", price: 6.99, veg: false },
-          { id: "cegg-fried-rice", name: "C & Egg Fried Rice", desc: "Wok-tossed rice with chicken, egg & aromatic oriental seasoning.", price: 7.99, veg: false },
-          { id: "egg-fried-rice", name: "Egg Fried Rice", desc: "Fluffy egg and fragrant rice wok-tossed with fresh vegetables.", price: 5.99, veg: true },
-          { id: "paneer-fried-rice", name: "Paneer Fried Rice", desc: "Fragrant rice tossed with golden paneer, vegetables & oriental sauces.", price: 6.99, veg: true },
-          { id: "veg-manch-fried-rice", name: "Veg Manchurian Fried Rice", desc: "Wok-tossed fried rice topped with crispy vegetable Manchurian.", price: 6.49, veg: true },
-          { id: "mushroom-rice", name: "Mushroom Rice", desc: "Fragrant rice tossed with juicy mushrooms, vegetables & aromatic seasoning.", price: 5.99, veg: true }
-        ],
-        addon: { id: "chilli-garlic-friedrice", name: "Chilli Garlic 🌶️🌶️", desc: "Extra-hot chilli garlic seasoning stirred through your fried rice.", price: 0.50, veg: true }
-      },
-      {
-        id: "noodles", label: "Noodles", num: "03",
+        id: "noodles", label: "Noodles", num: "02",
         note: "Hakka-style noodles, wok-tossed to order.",
         items: [
           { id: "veg-noodles", name: "Veg Noodles", desc: "Wok-tossed noodles with crunchy vegetables & oriental sauces.", price: 5.99, veg: true },
@@ -4021,7 +4006,31 @@
         addon: { id: "chilli-garlic-noodles", name: "Chilli Garlic 🌶️🌶️", desc: "Extra-hot chilli garlic seasoning stirred through your noodles.", price: 0.50, veg: true }
       },
       {
-        id: "curries", label: "Curries", num: "04",
+        id: "breads", label: "Breads", num: "03",
+        note: "Fresh from the tandoor, to go with any curry.",
+        items: [
+          { id: "butter-naan", name: "Butter Naan", desc: "Soft, fluffy tandoor-baked naan brushed generously with melted butter.", price: 1.99, veg: true },
+          { id: "garlic-naan", name: "Garlic Naan", desc: "Tandoor-baked naan topped with fresh garlic & coriander.", price: 2.49, veg: true },
+          { id: "bhature", name: "Bhature (1pc)", desc: "Soft, fluffy deep-fried bread, the classic partner to chole.", price: 1.99, veg: true }
+        ],
+        addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature to your order.", price: 1.99, veg: true }
+      },
+      {
+        id: "fried-rice", label: "Fried Rice", num: "04",
+        note: "Fragrant basmati, wok-tossed to order.",
+        items: [
+          { id: "veg-fried-rice", name: "Veg Fried Rice", desc: "Fragrant rice wok-tossed with garden vegetables & oriental seasoning.", price: 5.99, veg: true },
+          { id: "chicken-fried-rice", name: "Chicken Fried Rice", desc: "Fragrant rice wok-tossed with tender chicken & fresh vegetables.", price: 6.99, veg: false },
+          { id: "cegg-fried-rice", name: "C & Egg Fried Rice", desc: "Wok-tossed rice with chicken, egg & aromatic oriental seasoning.", price: 7.99, veg: false },
+          { id: "egg-fried-rice", name: "Egg Fried Rice", desc: "Fluffy egg and fragrant rice wok-tossed with fresh vegetables.", price: 5.99, veg: true },
+          { id: "paneer-fried-rice", name: "Paneer Fried Rice", desc: "Fragrant rice tossed with golden paneer, vegetables & oriental sauces.", price: 6.99, veg: true },
+          { id: "veg-manch-fried-rice", name: "Veg Manchurian Fried Rice", desc: "Wok-tossed fried rice topped with crispy vegetable Manchurian.", price: 6.49, veg: true },
+          { id: "mushroom-rice", name: "Mushroom Rice", desc: "Fragrant rice tossed with juicy mushrooms, vegetables & aromatic seasoning.", price: 5.99, veg: true }
+        ],
+        addon: { id: "chilli-garlic-friedrice", name: "Chilli Garlic 🌶️🌶️", desc: "Extra-hot chilli garlic seasoning stirred through your fried rice.", price: 0.50, veg: true }
+      },
+      {
+        id: "curries", label: "Curries", num: "05",
         note: "Slow-cooked gravies, finished to order.",
         subgroups: [
           {
@@ -4032,7 +4041,8 @@
               { id: "bhindi-masala", name: "Bhindi Masala", desc: "Tender okra cooked with onion, tomato & traditional Indian spices.", price: 6.99, veg: true },
               { id: "rajma", name: "Rajma", desc: "Slow-cooked kidney beans in a rich, homestyle onion-tomato gravy.", price: 6.99, veg: true },
               { id: "amritsari-chole-bhature", name: "Amritsari Chole Bhature", desc: "Slow-cooked chickpeas in a bold Amritsari masala, served with fluffy fried bhature.", price: 7.99, veg: true }
-            ]
+            ],
+            addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature — perfect with your Amritsari Chole Bhature.", price: 1.99, veg: true }
           },
           {
             label: "Non-Veg Curry", items: [
@@ -4043,11 +4053,10 @@
               { id: "spice-special-egg-curry", name: "Spice Special Egg Curry", desc: "Our house-special egg curry, simmered in a rich, bold masala gravy.", price: 7.49, veg: false }
             ]
           }
-        ],
-        addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature — perfect with your Amritsari Chole Bhature.", price: 1.99, veg: true }
+        ]
       },
       {
-        id: "dal-rice", label: "Dal & Rice", num: "05",
+        id: "dal-rice", label: "Dal & Rice", num: "06",
         note: "Comforting, homestyle & tempered with ghee.",
         items: [
           { id: "rajma-chawal", name: "Rajma Chawal", desc: "Comforting rajma served with fragrant steamed basmati rice.", price: 7.99, veg: true },
@@ -4059,7 +4068,7 @@
         ]
       },
       {
-        id: "specials", label: "Chef's Specials", num: "06",
+        id: "specials", label: "Chef's Specials", num: "07",
         note: "Signature dishes you won't find on every menu.",
         items: [
           { id: "spice-special-paneer-masala", name: "The Spice Special Paneer Masala", desc: "Our house-special paneer curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: true },
@@ -4069,7 +4078,7 @@
         ]
       },
       {
-        id: "sides", label: "Sides & Snacks", num: "07",
+        id: "sides", label: "Sides & Snacks", num: "08",
         note: "Perfect on the side, or on their own.",
         items: [
           { id: "french-fries", name: "French Fries 🍟", desc: "Golden, crispy fries, lightly salted.", price: 2.99, veg: true },
@@ -4079,16 +4088,6 @@
           { id: "chicken-samosa-3pc", name: "Chicken Samosa (3 pcs)", desc: "Crispy pastry parcels filled with a savoury spiced chicken filling.", price: 3.49, veg: false },
           { id: "veg-samosa-3pc", name: "Veg Samosa (3 pcs)", desc: "Crispy pastry parcels filled with a savoury spiced vegetable filling.", price: 3.49, veg: true }
         ]
-      },
-      {
-        id: "breads", label: "Breads", num: "08",
-        note: "Fresh from the tandoor, to go with any curry.",
-        items: [
-          { id: "butter-naan", name: "Butter Naan", desc: "Soft, fluffy tandoor-baked naan brushed generously with melted butter.", price: 1.99, veg: true },
-          { id: "garlic-naan", name: "Garlic Naan", desc: "Tandoor-baked naan topped with fresh garlic & coriander.", price: 2.49, veg: true },
-          { id: "bhature", name: "Bhature (1pc)", desc: "Soft, fluffy deep-fried bread, the classic partner to chole.", price: 1.99, veg: true }
-        ],
-        addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature to your order.", price: 1.99, veg: true }
       },
       {
         id: "desserts", label: "Sweets & Lassi", num: "09",
@@ -4106,7 +4105,10 @@
     const ITEM_INDEX = {};
     MENU.forEach(cat => {
       (cat.items || []).forEach(it => ITEM_INDEX[it.id] = it);
-      (cat.subgroups || []).forEach(sg => sg.items.forEach(it => ITEM_INDEX[it.id] = it));
+      (cat.subgroups || []).forEach(sg => {
+        sg.items.forEach(it => ITEM_INDEX[it.id] = it);
+        if (sg.addon) ITEM_INDEX[sg.addon.id] = sg.addon;
+      });
       if (cat.addon) ITEM_INDEX[cat.addon.id] = cat.addon;
     });
 
@@ -4262,13 +4264,13 @@
     /* image shown on each round category tile / modal header */
     const CAT_TILE_IMAGES = {
       starters: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80",
-      "fried-rice": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80",
       noodles: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=300&q=80",
+      breads: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80",
+      "fried-rice": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80",
       curries: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=300&q=80",
       "dal-rice": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=300&q=80",
       specials: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=300&q=80",
       sides: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=300&q=80",
-      breads: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80",
       desserts: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=300&q=80"
     };
 
@@ -4293,6 +4295,7 @@
         body = cat.subgroups.map(sg => `
       <p class="menu-subhead">${sg.label}</p>
       <div class="menu-grid">${sg.items.map(it => dishCard(it, true)).join("")}</div>
+      ${sg.addon ? addonStrip(sg.addon) : ""}
     `).join("");
       }
       if (cat.addon) body += addonStrip(cat.addon);
@@ -4328,6 +4331,7 @@
           body = cat.subgroups.map(sg => `
         <p class="menu-subhead">${sg.label}</p>
         <div class="menu-grid">${sg.items.map(it => dishCard(it, true)).join("")}</div>
+        ${sg.addon ? addonStrip(sg.addon) : ""}
       `).join("");
         }
         if (cat.addon) body += addonStrip(cat.addon);
@@ -4363,11 +4367,15 @@
 
     function bindMenuEvents() {
       $all(".qty-stepper").forEach(stepper => {
+        if (stepper.dataset.bound) return;
+        stepper.dataset.bound = "1";
         const id = stepper.dataset.id;
         stepper.querySelector(".qty-plus").addEventListener("click", () => setQty(id, (cart[id] || 0) + 1, stepper));
         stepper.querySelector(".qty-minus").addEventListener("click", () => setQty(id, Math.max(0, (cart[id] || 0) - 1), stepper));
       });
       $all(".add-btn").forEach(btn => {
+        if (btn.dataset.bound) return;
+        btn.dataset.bound = "1";
         btn.addEventListener("click", () => {
           const id = btn.dataset.id;
           const startQty = cart[id] || 0;
@@ -4577,7 +4585,7 @@
        structured with clear section headers and dividers for a professional look. */
     function buildWhatsAppMessage() {
       const f = buildOrderFields();
-      const methodLabel = f.method === "bank" ? "Bank Transfer (in advance)" : "Cash on Delivery";
+      const methodLabel = f.method === "bank" ? "Bank Transfer (in advance)" : "Pay on Delivery";
       const orderId = ensureOrderId();
       const divider = "───────────────────";
 
@@ -4611,7 +4619,7 @@
     /* Plain-text version for email clients that don't render WhatsApp-style markdown. */
     function buildEmailMessage() {
       const f = buildOrderFields();
-      const methodLabel = f.method === "bank" ? "Bank Transfer (in advance)" : "Cash on Delivery";
+      const methodLabel = f.method === "bank" ? "Bank Transfer (in advance)" : "Pay on Delivery";
       const orderId = ensureOrderId();
       const divider = "----------------------------------------";
 
