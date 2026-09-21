@@ -1471,6 +1471,40 @@
       font-size: 13px;
     }
 
+    .naan-strip.no-photo .info {
+      flex: 1 1 220px;
+    }
+
+    .naan-strip.no-photo .add-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .naan-strip .addon-price {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    @media (max-width: 560px) {
+      .naan-strip.no-photo {
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .naan-strip.no-photo .info {
+        flex-basis: calc(100% - 16px);
+      }
+
+      .naan-strip.no-photo .qty-stepper,
+      .naan-strip.no-photo .add-btn {
+        flex: 1 1 0;
+      }
+    }
+
     /* ================= STORY QUOTE DIVIDER ================= */
     .quote-band {
       padding: 110px 0;
@@ -4242,9 +4276,10 @@
 
     function addonStrip(addon) {
       const qty = cart[addon.id] || 0;
+      const hasPhoto = !addon.id.startsWith("chilli-garlic-");
       return `
-  <div class="naan-strip" data-id="${addon.id}">
-    <div class="addon-photo"><img src="${foodImageFor(addon)}" alt="${addon.name}" loading="lazy"></div>
+  <div class="naan-strip${hasPhoto ? "" : " no-photo"}" data-id="${addon.id}">
+    ${hasPhoto ? `<div class="addon-photo"><img src="${foodImageFor(addon)}" alt="${addon.name}" loading="lazy"></div>` : ""}
     <div class="info">
       ${vegIconSVG(addon.veg)}
       <div>
@@ -4257,7 +4292,7 @@
       <span class="qty-val">${qty}</span>
       <button type="button" class="qty-plus" aria-label="Increase quantity">+</button>
     </div>
-    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <s class="price-original">${fmt(addon.price)}</s> <span class="price-final">${fmt(discountedPrice(addon.price))}</span></button>
+    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <span class="addon-price"><span class="price-final">${fmt(discountedPrice(addon.price))}</span></span></button>
   </div>`;
     }
 
@@ -4276,7 +4311,8 @@
 
     function renderCategoryPicker() {
       const grid = $("#catPickerGrid");
-      grid.innerHTML = MENU.map(cat => `
+      const categoryOrder = ["starters", "fried-rice", "noodles", "curries", "dal-rice", "specials", "sides", "breads", "desserts"];
+      grid.innerHTML = categoryOrder.map(id => MENU.find(cat => cat.id === id)).filter(Boolean).map(cat => `
     <button type="button" class="cat-tile" data-cat="${cat.id}">
       <span class="cat-tile-photo"><img src="${CAT_TILE_IMAGES[cat.id] || FOOD_IMAGES.default}" alt="${cat.label}" loading="lazy"></span>
       <span class="cat-tile-label">${cat.label}</span>
@@ -4347,7 +4383,7 @@
     }
 
     /* ---------------- POPULAR PICKS ---------------- */
-    const POPULAR_IDS = ["chicken-bhuna", "dragon-paneer", "spice-special-egg-curry", "cheese-anguri", "chicken-majestic", "mango-lassi"];
+    const POPULAR_IDS = ["chicken-bhuna", "amritsari-chole-bhature", "dragon-paneer", "spice-special-egg-curry", "cheese-anguri", "chicken-majestic", "mango-lassi"];
 
     function renderPopular() {
       const mount = $("#popularScroll");
