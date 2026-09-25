@@ -1013,7 +1013,7 @@
       gap: 56px;
       padding: 13px 0;
       white-space: nowrap;
-      animation: marquee 28s linear infinite;
+      animation: marquee 70s linear infinite;
       width: max-content;
     }
 
@@ -2606,7 +2606,7 @@
       }
 
       .nav-toggle {
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
         width: 44px;
@@ -3581,75 +3581,6 @@
   </section>
 
 
-
-  <!-- ================= HERO ================= -->
-  <section class="hero" id="home">
-    <div class="hero-spice-glow"></div>
-    <div class="hero-garnish" aria-hidden="true">
-
-      <svg class="hero-squiggle sq-l" viewBox="0 0 420 520" fill="none">
-        <path d="M10 40 C 120 -10, 160 90, 70 130 S 40 260, 150 250 S 210 380, 110 430 S 130 500, 40 500"
-          stroke="var(--gold-soft)" stroke-width="2.5" stroke-linecap="round" />
-      </svg>
-      <svg class="hero-squiggle sq-r" viewBox="0 0 420 520" fill="none">
-        <path d="M410 30 C 300 -10, 260 100, 350 140 S 380 270, 270 260 S 210 390, 310 440 S 290 500, 380 500"
-          stroke="var(--gold-soft)" stroke-width="2.5" stroke-linecap="round" />
-      </svg>
-
-
-      <!-- Naan bread -->
-      <div class="food-item food-naan" style="--x:84%; --y:10%; --d:.5s; --r:10deg;">
-        <svg viewBox="0 0 200 160">
-          <ellipse cx="100" cy="86" rx="86" ry="46" fill="#0f0d0a" opacity=".16" />
-          <path d="M18 80 C 18 30 182 30 182 80 C 182 118 150 130 100 130 C 50 130 18 118 18 80 Z" fill="#e9c98a" />
-          <path d="M30 78 C 30 42 170 42 170 78 C 170 106 145 116 100 116 C 55 116 30 106 30 78 Z" fill="#f2d9a4" />
-          <ellipse cx="66" cy="66" rx="8" ry="5" fill="#8a5a2c" opacity=".55" />
-          <ellipse cx="120" cy="58" rx="10" ry="6" fill="#8a5a2c" opacity=".5" />
-          <ellipse cx="100" cy="92" rx="7" ry="4" fill="#8a5a2c" opacity=".45" />
-          <ellipse cx="140" cy="88" rx="6" ry="4" fill="#8a5a2c" opacity=".4" />
-          <path d="M45 72 Q100 55 155 76" stroke="#c9962c" stroke-width="3" fill="none" stroke-linecap="round"
-            opacity=".55" />
-        </svg>
-      </div>
-
-
-      <!-- Samosa -->
-      <div class="food-item food-samosa" style="--x:88%; --y:66%; --d:1.5s; --r:12deg;">
-        <svg viewBox="0 0 200 180">
-          <ellipse cx="100" cy="150" rx="70" ry="14" fill="#0f0d0a" opacity=".18" />
-          <path d="M40 150 L100 24 L160 150 Z" fill="#c9962c" />
-          <path d="M40 150 L100 24 L100 150 Z" fill="#e3b94f" />
-          <path d="M100 24 L160 150 L100 150 Z" fill="#b8811f" />
-          <path d="M60 150 Q100 90 140 150" stroke="#8a5a17" stroke-width="3" fill="none" opacity=".5" />
-        </svg>
-      </div>
-
-    </div>
-    <div class="wrap">
-      <h1>Bold spices, <em>ground fresh</em>.<br>Delivered to your door.</h1>
-      <p class="hero-sub">Authentic Indian &amp; Indo-Chinese cooking, made to order and brought straight to you,
-        anywhere we deliver across the Sheffield.</p>
-      <div class="hero-ctas">
-        <a href="#menu" class="btn order-now btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1" />
-            <circle cx="19" cy="21" r="1" />
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-          </svg>
-          Order Now
-        </a>
-        <a href="#story" class="btn btn-ghost">Our Story</a>
-      </div>
-      <div class="hero-badges">
-        <div><strong>40+</strong><span>Dishes on the Menu</span></div>
-        <div><strong>100%</strong><span>Cooked to Order</span></div>
-        <div><strong>Sheffield</strong><span>Home Delivery</span></div>
-      </div>
-    </div>
-  </section>
-
-
   <!-- ================= MENU ================= -->
   <section class="menu-section" id="menu">
     <div class="wrap">
@@ -3966,7 +3897,7 @@
                 <path
                   d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.78 14.13c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.51.32.07.12.07.68-.17 1.36z" />
               </svg>
-              Confirm Order — Send via WhatsApp &amp; Email
+              Confirm Order (Send via WhatsApp)
             </button>
             <p class="copy-note">Confirming will open WhatsApp and your email app, both pre-filled with your order
               &mdash; just hit send in each.</p>
@@ -4037,7 +3968,6 @@
           { id: "chicken-hakka-noodles", name: "Chicken Hakka Noodles", desc: "Classic Hakka-style noodles wok-tossed with chicken & soy seasoning.", price: 6.99, veg: false },
           { id: "egg-hakka-noodles", name: "Egg Hakka Noodles", desc: "Classic Hakka-style noodles wok-tossed with fluffy egg & soy seasoning.", price: 6.49, veg: false }
         ],
-        addon: { id: "chilli-garlic-noodles", name: "Chilli Garlic 🌶️🌶️", desc: "Extra-hot chilli garlic seasoning stirred through your noodles.", price: 0.50, veg: true }
       },
       {
         id: "breads", label: "Breads", num: "03",
@@ -4047,7 +3977,6 @@
           { id: "garlic-naan", name: "Garlic Naan", desc: "Tandoor-baked naan topped with fresh garlic & coriander.", price: 2.49, veg: true },
           { id: "bhature", name: "Bhature (1pc)", desc: "Soft, fluffy deep-fried bread, the classic partner to chole.", price: 1.99, veg: true }
         ],
-        addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature to your order.", price: 1.99, veg: true }
       },
       {
         id: "fried-rice", label: "Fried Rice", num: "04",
@@ -4061,7 +3990,6 @@
           { id: "veg-manch-fried-rice", name: "Veg Manchurian Fried Rice", desc: "Wok-tossed fried rice topped with crispy vegetable Manchurian.", price: 6.49, veg: true },
           { id: "mushroom-rice", name: "Mushroom Rice", desc: "Fragrant rice tossed with juicy mushrooms, vegetables & aromatic seasoning.", price: 5.99, veg: true }
         ],
-        addon: { id: "chilli-garlic-friedrice", name: "Chilli Garlic 🌶️🌶️", desc: "Extra-hot chilli garlic seasoning stirred through your fried rice.", price: 0.50, veg: true }
       },
       {
         id: "curries", label: "Curries", num: "05",
@@ -4076,7 +4004,6 @@
               { id: "rajma", name: "Rajma", desc: "Slow-cooked kidney beans in a rich, homestyle onion-tomato gravy.", price: 6.99, veg: true },
               { id: "amritsari-chole-bhature", name: "Amritsari Chole Bhature", desc: "Slow-cooked chickpeas in a bold Amritsari masala, served with fluffy fried bhature.", price: 7.99, veg: true }
             ],
-            addon: { id: "extra-bhature", name: "Extra Bhature", desc: "Add an extra piece of fluffy bhature — perfect with your Amritsari Chole Bhature.", price: 1.99, veg: true }
           },
           {
             label: "Non-Veg Curry", items: [
@@ -4298,11 +4225,11 @@
 
     /* image shown on each round category tile / modal header */
     const CAT_TILE_IMAGES = {
-      starters: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80",
-      noodles: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=300&q=80",
-      breads: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80",
-      "fried-rice": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80",
-      curries: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=300&q=80",
+      starters: "assets/Paneer%20chili.jpg.jpeg",
+      noodles: "assets/Egg%20noodles%20.jpg.jpeg",
+      breads: "assets/Garlic-Naan.jpg.jpeg",
+      "fried-rice": "assets/Veg%20fried%20rice.jpg.jpeg",
+      curries: "assets/Paneer-Butter-Masala%20.jpg.jpeg",
       "dal-rice": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=300&q=80",
       specials: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=300&q=80",
       sides: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=300&q=80",
