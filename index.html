@@ -3537,6 +3537,54 @@
         padding: 15px 16px 17px;
       }
     }
+
+    /* =========================================================
+       OUT OF STOCK FLAG  (set  soldOut: true  on a menu item)
+    ========================================================= */
+    .sold-out-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      background: var(--maroon);
+      color: #fff;
+      font-family: var(--ff-eyebrow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 999px;
+      box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .55);
+    }
+
+    .dish-card.sold-out:hover {
+      transform: none;
+    }
+
+    .dish-card.sold-out .dish-photo img {
+      filter: grayscale(1);
+      opacity: .55;
+    }
+
+    .dish-card.sold-out .dish-title-row,
+    .dish-card.sold-out .dish-price,
+    .dish-card.sold-out .dish-desc {
+      opacity: .55;
+    }
+
+    .dish-card.sold-out .qty-stepper {
+      opacity: .35;
+      pointer-events: none;
+    }
+
+    .add-btn:disabled,
+    .add-btn:disabled:hover {
+      background: #8a8378;
+      color: #f1ece2;
+      cursor: not-allowed;
+      transform: none;
+    }
   </style>
 </head>
 
@@ -4031,12 +4079,12 @@
         note: "Wok-fired and tandoor-fried, made to order.",
         items: [
           { id: "p-chilli", name: "Paneer Chilli", desc: "Crispy paneer tossed in a spicy chilli, garlic & soy sauce.", price: 6.99, veg: true },
-          { id: "veg-manch", name: "Veg Manchurian", desc: "Crispy vegetable dumplings tossed in a rich Manchurian sauce.", price: 6.99, veg: true },
+          { id: "veg-manch", name: "Veg Manchurian", desc: "Crispy vegetable dumplings tossed in a rich Manchurian sauce.", price: 6.99, veg: true, soldOut: true },
           { id: "chilli-chicken", name: "Chilli Chicken", desc: "Crispy chicken tossed with fresh chilli, peppers & Indo-Chinese sauce.", price: 6.99, veg: false },
           { id: "chicken-manch", name: "Chicken Manchurian", desc: "Tender chicken tossed in a rich, tangy Manchurian gravy.", price: 6.99, veg: false },
           { id: "chicken-majestic", name: "Dragon Chicken", desc: "Crispy chicken strips tossed in a creamy, spicy house sauce.", price: 6.99, veg: false },
           { id: "egg-bhaji", name: "Egg Pakoda", desc: "Hard-boiled eggs coated in a thick, seasoned chickpea flour (gram flour/besan) batter and deep-fried until golden brown and intensely crispy.", price: 1.99, veg: false },
-          { id: "honey-chilli-potato", name: "Honey Chilli Potato", desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true },
+          { id: "honey-chilli-potato", name: "Honey Chilli Potato", soldOut: true, desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true },
           { id: "dragon-paneer", name: "Dragon Paneer", desc: "Crispy paneer tossed in a fiery, tangy dragon sauce with peppers & spring onion.", price: 6.99, veg: true }
         ]
       },
@@ -4075,7 +4123,7 @@
         subgroups: [
           {
             label: "Veg Curry", items: [
-              { id: "paneer-butter-masala", name: "Paneer Butter Masala", desc: "Soft paneer in a rich tomato-butter gravy finished with cream.", price: 7.99, veg: true },
+              { id: "paneer-butter-masala", soldOut: true, name: "Paneer Butter Masala", desc: "Soft paneer in a rich tomato-butter gravy finished with cream.", price: 7.99, veg: true },
               { id: "kadai-paneer", name: "Kadai Paneer", desc: "Paneer cooked with peppers, onion & freshly ground kadai spices.", price: 7.99, veg: true },
               { id: "sev-tamatar", name: "Sev Tamatar", desc: "Tangy tomato gravy topped with crispy sev & aromatic Indian spices.", price: 6.99, veg: true },
               { id: "bhindi-masala", name: "Bhindi Masala", desc: "Tender okra cooked with onion, tomato & traditional Indian spices.", price: 6.99, veg: true },
@@ -4086,7 +4134,7 @@
           {
             label: "Non-Veg Curry", items: [
               { id: "chicken-bhuna", name: "Chicken Bhuna", desc: "Tender chicken simmered in a thick, richly spiced onion-tomato masala.", price: 7.99, veg: false },
-              { id: "chicken-butter-masala", name: "Chicken Butter Masala", desc: "Tender chicken in a rich buttery tomato gravy finished with cream.", price: 7.99, veg: false },
+              { id: "chicken-butter-masala", soldOut: true, name: "Chicken Butter Masala", desc: "Tender chicken in a rich buttery tomato gravy finished with cream.", price: 7.99, veg: false },
               { id: "chicken-karai", name: "Chicken Karai", desc: "Tender chicken cooked with peppers, tomato, onion & bold kadai spices.", price: 7.99, veg: false },
               { id: "egg-kari", name: "Egg Kari", desc: "Boiled eggs simmered in a rich, aromatic onion-tomato curry.", price: 6.99, veg: false },
               { id: "spice-special-egg-curry", name: "Spice Special Egg Curry", desc: "Our house-special egg curry, simmered in a rich, bold masala gravy.", price: 7.49, veg: false }
@@ -4113,7 +4161,7 @@
           { id: "spice-special-paneer-masala", name: "The Spice Special Paneer Masala", desc: "Our house-special paneer curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: true },
           { id: "spice-special-chicken-masala", name: "The Spice Special Chicken Masala", desc: "Our house-special chicken curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: false },
           { id: "ghee-pepper-papadam-curry", name: "Ghee Pepper Papadam Curry", desc: "Crisp papadam simmered in a peppery ghee-roasted curry, finished with cracked pepper.", price: 6.99, veg: true },
-          { id: "cheese-anguri", name: "Cheese Anguri (Butter Masala)", desc: "Soft cheese dumplings in a rich, creamy butter masala gravy.", price: 8.99, veg: true }
+          { id: "cheese-anguri", soldOut: true, name: "Cheese Anguri (Butter Masala)", desc: "Soft cheese dumplings in a rich, creamy butter masala gravy.", price: 8.99, veg: true }
         ]
       },
       {
@@ -4141,7 +4189,7 @@
         id: "desserts", label: "Sweets & Lassi", num: "09",
         note: "A sweet finish, chilled or warm.",
         items: [
-          { id: "gulab-jamun", name: "Gulab Jamun (3pcs)", desc: "Soft milk dumplings soaked in warm rose & cardamom syrup.", price: 2.99, veg: true },
+          // { id: "gulab-jamun", name: "Gulab Jamun (3pcs)", desc: "Soft milk dumplings soaked in warm rose & cardamom syrup.", price: 2.99, veg: true },
           { id: "salted-lassi", name: "Salted Lassi", desc: "Chilled, churned yoghurt drink, lightly salted.", price: 1.99, veg: true },
           { id: "sweet-lassi", name: "Sweet Lassi", desc: "Chilled, churned yoghurt drink, lightly sweetened.", price: 2.99, veg: true },
           { id: "mango-lassi", name: "Mango Lassi", desc: "Chilled, churned yoghurt drink blended with sweet mango.", price: 3.99, veg: true }
@@ -4265,10 +4313,12 @@
     }
 
     function dishCard(item, withImage = true) {
-      const qty = cart[item.id] || 0;
+      const soldOut = !!item.soldOut;
+      const qty = soldOut ? 0 : (cart[item.id] || 0);
       const imageBlock = withImage ? `<div class="dish-photo"><img src="${foodImageFor(item)}" alt="${item.name}" loading="lazy"></div>` : "";
       return `
-  <div class="dish-card${withImage ? " has-image" : ""}" data-veg="${item.veg}" data-id="${item.id}">
+  <div class="dish-card${withImage ? " has-image" : ""}${soldOut ? " sold-out" : ""}" data-veg="${item.veg}" data-id="${item.id}">
+    ${soldOut ? '<span class="sold-out-badge">Out of Stock</span>' : ""}
     ${imageBlock}
     <div class="dish-content">
       <div class="dish-top">
@@ -4278,11 +4328,11 @@
       <p class="dish-desc">${item.desc}</p>
       <div class="dish-bottom">
         <div class="qty-stepper" data-id="${item.id}">
-          <button type="button" class="qty-minus" aria-label="Decrease quantity">−</button>
+          <button type="button" class="qty-minus" aria-label="Decrease quantity"${soldOut ? " disabled" : ""}>−</button>
           <span class="qty-val">${qty}</span>
-          <button type="button" class="qty-plus" aria-label="Increase quantity">+</button>
+          <button type="button" class="qty-plus" aria-label="Increase quantity"${soldOut ? " disabled" : ""}>+</button>
         </div>
-        <button type="button" class="add-btn" data-id="${item.id}">Add to Cart</button>
+        <button type="button" class="add-btn" data-id="${item.id}"${soldOut ? " disabled" : ""}>${soldOut ? "Out of Stock" : "Add to Cart"}</button>
       </div>
     </div>
   </div>`;
@@ -4428,6 +4478,7 @@
         btn.dataset.bound = "1";
         btn.addEventListener("click", () => {
           const id = btn.dataset.id;
+          if (ITEM_INDEX[id] && ITEM_INDEX[id].soldOut) { showToast(`${ITEM_INDEX[id].name} is out of stock`); return; }
           const startQty = cart[id] || 0;
           const newQty = startQty + (startQty === 0 ? 1 : 0); // ensure at least 1 added
           cart[id] = startQty === 0 ? 1 : startQty;
@@ -4443,6 +4494,7 @@
     }
 
     function setQty(id, qty, stepperEl) {
+      if (ITEM_INDEX[id] && ITEM_INDEX[id].soldOut && qty > 0) return; // can't add out-of-stock items
       if (qty <= 0) { delete cart[id]; } else { cart[id] = qty; }
       syncQtyDisplays(id);
       renderCart();
