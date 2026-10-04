@@ -644,6 +644,125 @@
       display: none;
     }
 
+
+
+    /* ================= OFFER POPUP ================= */
+    .offer-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgb(10 8 6 / 0%);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .28s ease, visibility .28s ease;
+      overflow-y: auto;
+    }
+
+    .offer-modal.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .offer-modal-content {
+      position: relative;
+      width: min(92vw, 560px);
+      max-height: calc(100dvh - 48px);
+      border-radius: 18px;
+      overflow: visible;
+      transform: translateY(14px) scale(.97);
+      transition: transform .32s cubic-bezier(.2, .8, .2, 1);
+      filter: drop-shadow(0 28px 60px rgba(0, 0, 0, .48));
+    }
+
+    .offer-modal.show .offer-modal-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .offer-modal-image {
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      max-height: calc(100dvh - 48px);
+      object-fit: contain;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(201, 150, 44, .55);
+    }
+
+    .offer-modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      border: 2px solid rgba(255, 255, 255, .9);
+      border-radius: 50%;
+      background: #171310;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-size: 25px;
+      line-height: 1;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .4);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .offer-modal-close:hover {
+      transform: scale(1.06);
+      background: var(--maroon);
+    }
+
+    body.offer-modal-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 560px) {
+      .offer-modal {
+        padding: 18px 12px;
+        align-items: center;
+      }
+
+      .offer-modal-content {
+        width: min(94vw, 430px);
+        max-height: calc(100dvh - 36px);
+      }
+
+      .offer-modal-image {
+        max-height: calc(100dvh - 36px);
+        border-radius: 14px;
+      }
+
+      .offer-modal-close {
+        top: -10px;
+        right: -6px;
+        width: 40px;
+        height: 40px;
+        font-size: 23px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .offer-modal {
+        padding: 14px 8px;
+      }
+
+      .offer-modal-content,
+      .offer-modal-image {
+        max-height: calc(100dvh - 28px);
+      }
+    }
+
     /* ================= CATEGORY PICKER ================= */
     .cat-picker {
       position: relative;
@@ -3539,7 +3658,7 @@
     }
 
     /* =========================================================
-       OUT OF STOCK FLAG  (set  soldOut: true  on a menu item)
+       OUT OF STOCK FLAG  (set  soldOut: false  on a menu item)
     ========================================================= */
     .sold-out-badge {
       position: absolute;
@@ -3917,6 +4036,20 @@
   </aside>
 
   <!-- ================= CHECKOUT MODAL ================= -->
+
+
+  <!-- ================= OFFER POPUP ================= -->
+  <!-- Change only the image path below when you upload your offer poster. -->
+  <div class="offer-modal" id="offerModal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="Special offer">
+    <div class="offer-modal-content" id="offerModalContent">
+      <button class="offer-modal-close" id="offerModalClose" type="button" aria-label="Close offer popup">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <img class="offer-modal-image" src="assets/offer-poster.jpeg" alt="Special offer from The Spice Kitchen">
+    </div>
+  </div>
+
   <div class="modal" id="categoryModal">
     <div class="modal-panel cat-modal-panel">
       <div class="sheet-handle" aria-hidden="true"></div>
@@ -4058,7 +4191,7 @@
     const CONFIG = {
       whatsappNumber: "447760772562",     // WhatsApp number, digits only, country code, no + or spaces
       email: "thespicekitchen7@gmail.com",
-      trackingEndpoint: "https://script.google.com/macros/s/AKfycbyyIUXQiEd9wVz1vIsqX6fwEfqR8rVasl-sbRPkBOiLd6Cd1ekKpTFo_7azDnT1LuHX/exec",
+      trackingEndpoint: "https://script.google.com/macros/s/AKfycbxL1atXEpr60Qfj3ntDEC09-6PjuUKknzkNmJHEPU5JwtnxEwQf6kcEuiwfhkCnhfue/exec",
       phoneDisplay: "+44 7760 772562",
       deliveryArea: "Sheffield",
       hours: {
@@ -4079,12 +4212,12 @@
         note: "Wok-fired and tandoor-fried, made to order.",
         items: [
           { id: "p-chilli", name: "Paneer Chilli", desc: "Crispy paneer tossed in a spicy chilli, garlic & soy sauce.", price: 6.99, veg: true },
-          { id: "veg-manch", name: "Veg Manchurian", desc: "Crispy vegetable dumplings tossed in a rich Manchurian sauce.", price: 6.99, veg: true, soldOut: true },
+          { id: "veg-manch", name: "Veg Manchurian", desc: "Crispy vegetable dumplings tossed in a rich Manchurian sauce.", price: 6.99, veg: true, soldOut: false },
           { id: "chilli-chicken", name: "Chilli Chicken", desc: "Crispy chicken tossed with fresh chilli, peppers & Indo-Chinese sauce.", price: 6.99, veg: false },
           { id: "chicken-manch", name: "Chicken Manchurian", desc: "Tender chicken tossed in a rich, tangy Manchurian gravy.", price: 6.99, veg: false },
           { id: "chicken-majestic", name: "Dragon Chicken", desc: "Crispy chicken strips tossed in a creamy, spicy house sauce.", price: 6.99, veg: false },
           { id: "egg-bhaji", name: "Egg Pakoda", desc: "Hard-boiled eggs coated in a thick, seasoned chickpea flour (gram flour/besan) batter and deep-fried until golden brown and intensely crispy.", price: 1.99, veg: false },
-          { id: "honey-chilli-potato", name: "Honey Chilli Potato", soldOut: true, desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true },
+          { id: "honey-chilli-potato", name: "Honey Chilli Potato", soldOut: false, desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true },
           { id: "dragon-paneer", name: "Dragon Paneer", desc: "Crispy paneer tossed in a fiery, tangy dragon sauce with peppers & spring onion.", price: 6.99, veg: true }
         ]
       },
@@ -4123,7 +4256,7 @@
         subgroups: [
           {
             label: "Veg Curry", items: [
-              { id: "paneer-butter-masala", soldOut: true, name: "Paneer Butter Masala", desc: "Soft paneer in a rich tomato-butter gravy finished with cream.", price: 7.99, veg: true },
+              { id: "paneer-butter-masala", soldOut: false, name: "Paneer Butter Masala", desc: "Soft paneer in a rich tomato-butter gravy finished with cream.", price: 7.99, veg: true },
               { id: "kadai-paneer", name: "Kadai Paneer", desc: "Paneer cooked with peppers, onion & freshly ground kadai spices.", price: 7.99, veg: true },
               { id: "sev-tamatar", name: "Sev Tamatar", desc: "Tangy tomato gravy topped with crispy sev & aromatic Indian spices.", price: 6.99, veg: true },
               { id: "bhindi-masala", name: "Bhindi Masala", desc: "Tender okra cooked with onion, tomato & traditional Indian spices.", price: 6.99, veg: true },
@@ -4134,7 +4267,7 @@
           {
             label: "Non-Veg Curry", items: [
               { id: "chicken-bhuna", name: "Chicken Bhuna", desc: "Tender chicken simmered in a thick, richly spiced onion-tomato masala.", price: 7.99, veg: false },
-              { id: "chicken-butter-masala", soldOut: true, name: "Chicken Butter Masala", desc: "Tender chicken in a rich buttery tomato gravy finished with cream.", price: 7.99, veg: false },
+              { id: "chicken-butter-masala", soldOut: false, name: "Chicken Butter Masala", desc: "Tender chicken in a rich buttery tomato gravy finished with cream.", price: 7.99, veg: false },
               { id: "chicken-karai", name: "Chicken Karai", desc: "Tender chicken cooked with peppers, tomato, onion & bold kadai spices.", price: 7.99, veg: false },
               { id: "egg-kari", name: "Egg Kari", desc: "Boiled eggs simmered in a rich, aromatic onion-tomato curry.", price: 6.99, veg: false },
               { id: "spice-special-egg-curry", name: "Spice Special Egg Curry", desc: "Our house-special egg curry, simmered in a rich, bold masala gravy.", price: 7.49, veg: false }
@@ -4161,7 +4294,7 @@
           { id: "spice-special-paneer-masala", name: "The Spice Special Paneer Masala", desc: "Our house-special paneer curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: true },
           { id: "spice-special-chicken-masala", name: "The Spice Special Chicken Masala", desc: "Our house-special chicken curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: false },
           { id: "ghee-pepper-papadam-curry", name: "Ghee Pepper Papadam Curry", desc: "Crisp papadam simmered in a peppery ghee-roasted curry, finished with cracked pepper.", price: 6.99, veg: true },
-          { id: "cheese-anguri", soldOut: true, name: "Cheese Anguri (Butter Masala)", desc: "Soft cheese dumplings in a rich, creamy butter masala gravy.", price: 8.99, veg: true }
+          { id: "cheese-anguri", soldOut: false, name: "Cheese Anguri (Butter Masala)", desc: "Soft cheese dumplings in a rich, creamy butter masala gravy.", price: 8.99, veg: true }
         ]
       },
       {
@@ -4406,6 +4539,7 @@
       const cat = MENU.find(c => c.id === catId);
       if (!cat) return;
       $("#categoryModalTitle").textContent = cat.label;
+      window.Track?.event("category_view", cat.label);
       $("#categoryModalNote").textContent = cat.note || "";
       $("#categoryModalBody").innerHTML = categoryBodyHTML(cat);
       bindMenuEvents();
@@ -4489,13 +4623,16 @@
           btn.textContent = "Added ✓";
           setTimeout(() => { btn.classList.remove("added"); btn.textContent = original; }, 1100);
           showToast(`${ITEM_INDEX[id].name} added to your order`);
+          window.Track?.event("add_to_cart", ITEM_INDEX[id].name, priceOf(id), { id, qty: cart[id] });
         });
       });
     }
 
     function setQty(id, qty, stepperEl) {
       if (ITEM_INDEX[id] && ITEM_INDEX[id].soldOut && qty > 0) return; // can't add out-of-stock items
+      const prevQty = cart[id] || 0;
       if (qty <= 0) { delete cart[id]; } else { cart[id] = qty; }
+      window.Track?.event(qty > prevQty ? "add_to_cart" : "remove_from_cart", ITEM_INDEX[id]?.name || id, ITEM_INDEX[id] ? priceOf(id) : 0, { id, qty });
       syncQtyDisplays(id);
       renderCart();
     }
@@ -4509,6 +4646,7 @@
       $all(".cat-tab").forEach(tab => {
         tab.addEventListener("click", () => {
           const target = document.getElementById("cat-" + tab.dataset.target);
+          window.Track?.event("menu_tab", tab.dataset.target);
           if (target) {
             window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 150, behavior: "smooth" });
           }
@@ -4583,7 +4721,7 @@
       renderRecap();
     }
 
-    function openCart() { $("#cartDrawer").classList.add("open"); $("#overlay").classList.add("show"); }
+    function openCart() { $("#cartDrawer").classList.add("open"); $("#overlay").classList.add("show"); window.Track?.event("cart_open", "", cartTotal(), { items: cartCount() }); }
     function closeCart() { $("#cartDrawer").classList.remove("open"); $("#overlay").classList.remove("show"); }
 
     /* ---------------- CHECKOUT MODAL ---------------- */
@@ -4608,6 +4746,7 @@
       closeNav();
       closeCart();
       currentOrderId = null; // fresh order id for this checkout session
+      window.Track?.event("begin_checkout", ensureOrderId(), cartTotal(), { items: cartCount() });
       $("#checkoutModal").classList.add("show");
       document.body.style.overflow = "hidden";
     }
@@ -4831,10 +4970,13 @@
       showToast("Order sent — WhatsApp & Email opened");
 
       trackOrder();
+      window.Track?.event("order_submit", ensureOrderId(), cartTotal(), { payment: getPaymentMethod(), items: cartCount(), area: ($("#custPostcode").value.trim().toUpperCase().split(/\s+/)[0] || "") });
+      window.Track?.flush(true);
     }
 
     function copyOrder() {
       if (!validateForm()) return;
+      window.Track?.event("copy_order", ensureOrderId(), cartTotal());
       navigator.clipboard.writeText(buildEmailMessage()).then(() => {
         showToast("Order copied to clipboard");
       }).catch(() => {
@@ -4961,6 +5103,7 @@
         vegOnly = !vegOnly;
         vegSwitch.classList.toggle("on", vegOnly);
         vegSwitch.setAttribute("aria-checked", vegOnly);
+        window.Track?.event("veg_filter", vegOnly ? "on" : "off");
         applyVegFilter();
       }
       vegSwitch.addEventListener("click", toggleVeg);
@@ -4970,6 +5113,250 @@
         if (e.key === "Escape") { closeCart(); closeCheckout(); closeCategoryModal(); closeNav(); }
       });
     });
+
+    /* ================= OFFER POPUP ================= */
+    (function () {
+      const offerModal = document.getElementById("offerModal");
+      const offerModalClose = document.getElementById("offerModalClose");
+      const offerModalContent = document.getElementById("offerModalContent");
+      const offerModalImage = offerModal && offerModal.querySelector(".offer-modal-image");
+      if (!offerModal) return;
+
+      function openOfferModal() {
+        offerModal.classList.add("show");
+        window.Track?.event("offer_popup_view");
+        offerModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("offer-modal-open");
+      }
+
+      function closeOfferModal() {
+        offerModal.classList.remove("show");
+        offerModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("offer-modal-open");
+      }
+
+      // Close button
+      if (offerModalClose) {
+        offerModalClose.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          window.Track?.event("offer_popup_close");
+          closeOfferModal();
+        });
+      }
+
+      // Click on the overlay (anywhere outside the poster) closes the popup
+      offerModal.addEventListener("click", (e) => {
+        if (!offerModalContent.contains(e.target)) closeOfferModal();
+      });
+
+      // Click on the poster image -> close popup and go to the menu section
+      if (offerModalImage) {
+        offerModalImage.addEventListener("click", () => {
+          window.Track?.event("offer_popup_click");
+          closeOfferModal();
+          const menu = document.getElementById("menu");
+          if (menu) menu.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.replaceState(null, "", "#menu");
+        });
+      }
+
+      // Escape closes it
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && offerModal.classList.contains("show")) closeOfferModal();
+      });
+
+      // Show shortly after page load
+      window.setTimeout(openOfferModal, 500);
+    })();
+  </script>
+
+  <script>
+    /* =========================================================
+       VISITOR TRACKING → Google Sheet "Track" tab
+       Batches events and posts them to CONFIG.trackingEndpoint.
+       Use window.Track.event(name, label, value, detailsObj) anywhere.
+    ========================================================= */
+    (function () {
+      "use strict";
+      const EP = () => (typeof CONFIG !== "undefined" ? CONFIG.trackingEndpoint : "");
+      const store = {
+        get: (k, ses) => { try { return (ses ? sessionStorage : localStorage).getItem(k); } catch (e) { return null; } },
+        set: (k, v, ses) => { try { (ses ? sessionStorage : localStorage).setItem(k, v); } catch (e) { } }
+      };
+      const rid = () => (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()) + Date.now()).replace(/[^a-z0-9]/gi, "").slice(0, 12);
+      const q = new URLSearchParams(location.search);
+      const ua = navigator.userAgent || "";
+      const m = (re) => (ua.match(re) || [])[1] || "";
+
+      /* ---- visitor + session (30-min inactivity = new session) ---- */
+      let vid = store.get("sk_vid"); const isNew = !vid;
+      if (!vid) { vid = rid(); store.set("sk_vid", vid); }
+      let sess = null; try { sess = JSON.parse(store.get("sk_sess")); } catch (e) { }
+      let newSession = false, visits = +store.get("sk_visits") || 0;
+      if (!sess || Date.now() - sess.last > 30 * 60 * 1000) {
+        sess = { id: rid(), last: Date.now() }; newSession = true; visits++; store.set("sk_visits", visits);
+      }
+      const touch = () => { sess.last = Date.now(); store.set("sk_sess", JSON.stringify(sess)); };
+
+      /* ---- device / browser / OS ---- */
+      let browser = "Other", bver = "";
+      if (/Edg(e|A|iOS)?\//.test(ua)) { browser = "Edge"; bver = m(/Edg(?:e|A|iOS)?\/([\d.]+)/); }
+      else if (/OPR\/|Opera/.test(ua)) { browser = "Opera"; bver = m(/(?:OPR|Opera)\/([\d.]+)/); }
+      else if (/SamsungBrowser\//.test(ua)) { browser = "Samsung Internet"; bver = m(/SamsungBrowser\/([\d.]+)/); }
+      else if (/Firefox\/|FxiOS\//.test(ua)) { browser = "Firefox"; bver = m(/(?:Firefox|FxiOS)\/([\d.]+)/); }
+      else if (/CriOS\//.test(ua)) { browser = "Chrome"; bver = m(/CriOS\/([\d.]+)/); }
+      else if (/Chrome\//.test(ua)) { browser = "Chrome"; bver = m(/Chrome\/([\d.]+)/); }
+      else if (/Safari\//.test(ua)) { browser = "Safari"; bver = m(/Version\/([\d.]+)/); }
+      const inApp = /Instagram/i.test(ua) ? "Instagram" : /FBAN|FBAV|FB_IAB/.test(ua) ? "Facebook" :
+        /musical_ly|TikTok|Bytedance/i.test(ua) ? "TikTok" : /Snapchat/i.test(ua) ? "Snapchat" :
+        /Twitter/i.test(ua) ? "Twitter" : /Pinterest/i.test(ua) ? "Pinterest" : /LinkedInApp/.test(ua) ? "LinkedIn" : "";
+
+      let os = "Other", osVer = "";
+      if (/Windows NT/.test(ua)) { os = "Windows"; const v = m(/Windows NT ([\d.]+)/); osVer = { "10.0": "10/11", "6.3": "8.1", "6.2": "8", "6.1": "7" }[v] || v; }
+      else if (/iPhone|iPad|iPod/.test(ua)) { os = "iOS"; osVer = m(/OS ([\d_]+)/).replace(/_/g, "."); }
+      else if (/Android/.test(ua)) { os = "Android"; osVer = m(/Android ([\d.]+)/); }
+      else if (/Mac OS X/.test(ua)) { os = navigator.maxTouchPoints > 1 ? "iPadOS" : "macOS"; osVer = m(/Mac OS X ([\d_.]+)/).replace(/_/g, "."); }
+      else if (/CrOS/.test(ua)) os = "ChromeOS";
+      else if (/Linux/.test(ua)) os = "Linux";
+
+      let device = typeof getDeviceInfo === "function" ? getDeviceInfo().category : (/Mobi/.test(ua) ? "mobile" : "desktop");
+      if (os === "iPadOS") device = "tablet";
+      let model = /iPhone/.test(ua) ? "iPhone" : /iPad/.test(ua) || os === "iPadOS" ? "iPad" : m(/Android [\d.]+; ([^;)]+?)(?: Build|\))/);
+      if (model === "K") model = "";
+
+      /* ---- traffic source / campaign ---- */
+      const ref = document.referrer || "";
+      const SEARCH = [["google", /(^|[./])google\.|googlequicksearchbox/], ["bing", /bing\./], ["yahoo", /yahoo\./], ["duckduckgo", /duckduckgo\./], ["ecosia", /ecosia\./]];
+      const SOCIAL = [["facebook", /facebook\.com|fb\.com|fb\.me|com\.facebook/], ["instagram", /instagram\.com|com\.instagram/], ["twitter", /\bt\.co\b|twitter\.com|\/x\.com|com\.twitter/], ["tiktok", /tiktok\.com/], ["youtube", /youtube\.com|youtu\.be/], ["pinterest", /pinterest\./], ["reddit", /reddit\.com/], ["linkedin", /linkedin\.com|lnkd\.in/], ["snapchat", /snapchat\.com/], ["whatsapp", /whatsapp|wa\.me/]];
+      const clickKey = ["gclid", "wbraid", "gbraid", "msclkid", "fbclid", "ttclid", "twclid"].find(k => q.get(k)) || "";
+      let source = q.get("utm_source") || "", medium = q.get("utm_medium") || "";
+      if (!source) {
+        const r = ref.toLowerCase(); let host = "";
+        try { host = new URL(ref).hostname.replace(/^www\./, ""); } catch (e) { }
+        const s = SEARCH.find(x => x[1].test(r)), so = SOCIAL.find(x => x[1].test(r));
+        if (/^g(clid|brid)|wbraid/.test(clickKey)) { source = "google"; medium = "cpc"; }
+        else if (clickKey === "msclkid") { source = "bing"; medium = "cpc"; }
+        else if (s) { source = s[0]; medium = "organic"; }
+        else if (so) { source = so[0]; medium = "social"; }
+        else if (clickKey === "fbclid") { source = "facebook"; medium = "social"; }
+        else if (clickKey === "ttclid") { source = "tiktok"; medium = "social"; }
+        else if (host && host !== location.hostname) { source = host; medium = "referral"; }
+        else if (inApp) { source = inApp.toLowerCase(); medium = "social"; }
+        else { source = "direct"; medium = "none"; }
+      }
+      if (!store.get("sk_first_src")) store.set("sk_first_src", source + " / " + medium);
+
+      const base = {
+        vid, sid: sess.id, visit: visits, returning: isNew ? "New" : "Returning",
+        ip: "", city: "", region: "", country: "", isp: "",
+        device, model, os, osVer, browser, bver, inApp,
+        screen: screen.width + "x" + screen.height, dpr: window.devicePixelRatio || 1,
+        lang: navigator.language || "", tz: (Intl.DateTimeFormat().resolvedOptions() || {}).timeZone || "",
+        conn: (navigator.connection && navigator.connection.effectiveType) || "",
+        dark: matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
+        ref: ref.slice(0, 200), source, medium, campaign: q.get("utm_campaign") || "", term: q.get("utm_term") || "",
+        content: q.get("utm_content") || "", clickId: clickKey, firstSource: store.get("sk_first_src") || "",
+        landing: location.href.slice(0, 300)
+      };
+
+      /* ---- IP + approximate location (cached per session) ---- */
+      async function lookupGeo() {
+        try { const c = JSON.parse(store.get("sk_geo", true)); if (c && c.ip) return c; } catch (e) { }
+        const get = async (url, map) => {
+          const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 2500);
+          try { const r = await fetch(url, { signal: ctl.signal }); if (!r.ok) throw 0; return map(await r.json()); } finally { clearTimeout(t); }
+        };
+        const providers = [
+          () => get("https://ipapi.co/json/", d => ({ ip: d.ip, city: d.city, region: d.region, country: d.country_name, isp: d.org })),
+          () => get("https://ipwho.is/", d => { if (d.success === false) throw 0; return { ip: d.ip, city: d.city, region: d.region, country: d.country, isp: (d.connection || {}).isp }; }),
+          () => get("https://api.ipify.org?format=json", d => ({ ip: d.ip }))
+        ];
+        for (const p of providers) { try { const g = await p(); if (g && g.ip) { store.set("sk_geo", JSON.stringify(g), true); return g; } } catch (e) { } }
+        return {};
+      }
+      async function lookupHints() {
+        try {
+          const h = await navigator.userAgentData.getHighEntropyValues(["model", "platformVersion"]);
+          if (h.model) base.model = h.model;
+          if (os === "Windows" && h.platformVersion) base.osVer = parseInt(h.platformVersion) >= 13 ? "11" : "10";
+        } catch (e) { }
+      }
+      const ready = Promise.race([
+        Promise.all([lookupGeo().then(g => Object.assign(base, g)), lookupHints()]),
+        new Promise(r => setTimeout(r, 3000))
+      ]);
+
+      /* ---- event queue (batched; flushed every 4s, on tab hide, and on demand) ---- */
+      const queue = []; let timer = null;
+      function event(name, label, value, details) {
+        touch();
+        queue.push({ t: new Date().toISOString(), e: name, l: label == null ? "" : String(label).slice(0, 120), v: value == null ? "" : value, d: details ? JSON.stringify(details).slice(0, 500) : "" });
+        if (!timer) timer = setTimeout(() => { timer = null; flush(); }, 4000);
+      }
+      async function flush(now) {
+        const ep = EP();
+        if (!queue.length) return;
+        if (!ep || ep.includes("PASTE_GOOGLE")) { queue.length = 0; return; }
+        if (!now) await ready;
+        const events = queue.splice(0);
+        if (!events.length) return;
+        const body = JSON.stringify({ type: "track", ctx: Object.assign({}, base, { viewport: innerWidth + "x" + innerHeight }), events });
+        try { if (navigator.sendBeacon && navigator.sendBeacon(ep, body)) return; } catch (e) { }
+        try { fetch(ep, { method: "POST", mode: "no-cors", keepalive: body.length < 60000, headers: { "Content-Type": "text/plain;charset=utf-8" }, body }); } catch (e) { }
+      }
+      window.Track = { event, flush };
+
+      /* ---- automatic events ---- */
+      if (newSession) event("session_start", "", visits);
+      event("page_view", location.pathname + location.hash);
+
+      // scroll depth
+      const marks = [25, 50, 75, 100]; let maxScroll = 0, ticking = false;
+      addEventListener("scroll", () => {
+        if (ticking) return; ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          const h = document.documentElement.scrollHeight - innerHeight;
+          const pct = h > 0 ? Math.min(100, Math.round(scrollY / h * 100)) : 100;
+          maxScroll = Math.max(maxScroll, pct);
+          while (marks.length && maxScroll >= (marks[0] === 100 ? 98 : marks[0])) { const k = marks.shift(); event("scroll_depth", k + "%", k); }
+        });
+      }, { passive: true });
+
+      // section views
+      if ("IntersectionObserver" in window) {
+        const so = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { event("section_view", en.target.id); so.unobserve(en.target); } }), { threshold: 0.35 });
+        ["categories", "popular", "menu", "story", "how", "contact"].forEach(id => { const el = document.getElementById(id); if (el) so.observe(el); });
+      }
+
+      // link clicks + checkout field progress (field names only, never what the user typed)
+      document.addEventListener("click", e => {
+        const a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
+        const h = a.getAttribute("href") || "";
+        if (h.startsWith("tel:")) event("click_phone", h.slice(4));
+        else if (h.startsWith("mailto:")) event("click_email", h.slice(7).split("?")[0]);
+        else if (/wa\.me|whatsapp\.com/.test(h)) event("click_whatsapp", h.slice(0, 60));
+        else if (h.startsWith("#") && a.closest(".main-nav")) event("nav_click", h);
+        else if (/^https?:/.test(h) && a.hostname !== location.hostname) event("click_outbound", h.slice(0, 100));
+      }, true);
+      const seenFields = {};
+      document.addEventListener("focusin", e => {
+        const f = e.target; if (!f.id || seenFields[f.id] || !f.closest || !f.closest("#checkoutModal")) return;
+        seenFields[f.id] = 1; event("checkout_field", f.id);
+      });
+
+      // time on page (visible seconds), reported whenever the tab is hidden / closed
+      let visibleSince = Date.now(), totalSec = 0;
+      function report() {
+        if (!visibleSince) return;
+        const sec = Math.round((Date.now() - visibleSince) / 1000); visibleSince = 0; totalSec += sec;
+        if (sec > 0) event("engagement", "", sec, { totalSec, maxScroll, cartItems: typeof cartCount === "function" ? cartCount() : 0 });
+        flush(true);
+      }
+      document.addEventListener("visibilitychange", () => { document.visibilityState === "hidden" ? report() : (visibleSince = Date.now()); });
+      addEventListener("pagehide", report);
+    })();
   </script>
 </body>
 
