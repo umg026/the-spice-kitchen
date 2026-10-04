@@ -4191,7 +4191,7 @@
     const CONFIG = {
       whatsappNumber: "447760772562",     // WhatsApp number, digits only, country code, no + or spaces
       email: "thespicekitchen7@gmail.com",
-      trackingEndpoint: "https://script.google.com/macros/s/AKfycbxL1atXEpr60Qfj3ntDEC09-6PjuUKknzkNmJHEPU5JwtnxEwQf6kcEuiwfhkCnhfue/exec",
+      trackingEndpoint: "https://script.google.com/macros/s/AKfycbygN8-Y6TYEk01u2lEdegsjtn_-u3-ZOU4DO5n0RrBGNTRfGr93MG0plj65rHAd66Qg/exec",
       phoneDisplay: "+44 7760 772562",
       deliveryArea: "Sheffield",
       hours: {
@@ -5210,7 +5210,7 @@
       else if (/Safari\//.test(ua)) { browser = "Safari"; bver = m(/Version\/([\d.]+)/); }
       const inApp = /Instagram/i.test(ua) ? "Instagram" : /FBAN|FBAV|FB_IAB/.test(ua) ? "Facebook" :
         /musical_ly|TikTok|Bytedance/i.test(ua) ? "TikTok" : /Snapchat/i.test(ua) ? "Snapchat" :
-        /Twitter/i.test(ua) ? "Twitter" : /Pinterest/i.test(ua) ? "Pinterest" : /LinkedInApp/.test(ua) ? "LinkedIn" : "";
+          /Twitter/i.test(ua) ? "Twitter" : /Pinterest/i.test(ua) ? "Pinterest" : /LinkedInApp/.test(ua) ? "LinkedIn" : "";
 
       let os = "Other", osVer = "";
       if (/Windows NT/.test(ua)) { os = "Windows"; const v = m(/Windows NT ([\d.]+)/); osVer = { "10.0": "10/11", "6.3": "8.1", "6.2": "8", "6.1": "7" }[v] || v; }
