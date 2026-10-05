@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Spice Kitchen Admin</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --panel: #ffffff;
+      --ink: #191511;
+      --muted: #675e51;
+      --line: #ded5c8;
+      --maroon: #8e2323;
+      --green: #22613a;
+      --gold: #b98621;
+      --shadow: 0 18px 45px -32px rgba(25, 21, 17, .45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .login-screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .login-card {
+      width: min(420px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    .login-card h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .login-card p,
+    .status,
+    .item-id,
+    .category-note {
+      color: var(--muted);
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin-top: 18px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #3c342b;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fffdf9;
+      color: var(--ink);
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(185, 134, 33, .16);
+    }
+
+    .primary,
+    .secondary,
+    .danger {
+      min-height: 42px;
+      border-radius: 6px;
+      padding: 0 15px;
+      font-weight: 800;
+    }
+
+    .primary {
+      background: var(--maroon);
+      color: #fff;
+    }
+
+    .secondary {
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .danger {
+      background: #f8e9e7;
+      color: #8e2323;
+      border: 1px solid #e9c6c1;
+    }
+
+    .app {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246, 241, 232, .94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 16px 22px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+    }
+
+    .brand p {
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .main {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .tools {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .status {
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .category {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .category-head {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 70px 1fr 1.5fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .category-title {
+      padding: 12px 16px;
+      background: #fbf6ed;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .category-title h2 {
+      font-size: 18px;
+    }
+
+    .group-title {
+      padding: 14px 16px 0;
+      color: var(--maroon);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .items {
+      padding: 12px 16px 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1.2fr 1.7fr 110px 100px 110px auto;
+      gap: 10px;
+      align-items: start;
+      background: #fffdf9;
+    }
+
+    .item-id {
+      margin-top: 6px;
+      font-size: 12px;
+      word-break: break-word;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      font-weight: 700;
+      color: #3c342b;
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--maroon);
+    }
+
+    .empty {
+      padding: 18px 16px;
+      color: var(--muted);
+    }
+
+    .soldout-row {
+      border-color: #e0a7a0;
+      background: #fff8f7;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 900px) {
+      .topbar-inner,
+      .tools,
+      .category-head,
+      .item {
+        grid-template-columns: 1fr;
+      }
+
+      .actions,
+      .status {
+        justify-content: flex-start;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="login-screen" id="loginScreen">
+    <form class="login-card" id="loginForm">
+      <h1>The Spice Kitchen Admin</h1>
+      <p>Sign in to manage the menu JSON.</p>
+      <div class="field">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <div class="field">
+        <button class="primary" type="submit">Login</button>
+      </div>
+      <p class="status" id="loginStatus"></p>
+    </form>
+  </section>
+
+  <section class="app" id="app">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <h1>Menu Dashboard</h1>
+          <p>Edit dishes, prices, veg labels and sold-out status.</p>
+        </div>
+        <div class="actions">
+          <a class="secondary" href="/" target="_blank" style="display:inline-grid;place-items:center;text-decoration:none;">Open Menu</a>
+          <button class="secondary" type="button" id="reloadBtn">Reload</button>
+          <button class="primary" type="button" id="saveBtn">Save Changes</button>
+          <button class="secondary" type="button" id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="tools">
+        <input id="searchInput" placeholder="Search dishes or categories">
+        <p class="status" id="status">Loading menu...</p>
+      </div>
+      <div id="menuEditor"></div>
+    </main>
+  </section>
+
+  <script>
+    const loginScreen = document.getElementById("loginScreen");
+    const app = document.getElementById("app");
+    const editor = document.getElementById("menuEditor");
+    const statusEl = document.getElementById("status");
+    const searchInput = document.getElementById("searchInput");
+    let menu = [];
+    let dirty = false;
+
+    const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[ch]));
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+    }
+
+    function markDirty() {
+      dirty = true;
+      setStatus("Unsaved changes");
+    }
+
+    function slugify(value) {
+      return String(value || "new-item")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 60) || "new-item";
+    }
+
+    function allItems(category) {
+      if (category.items) return [{ label: "", items: category.items, groupIndex: -1 }];
+      return (category.subgroups || []).map((group, groupIndex) => ({
+        label: group.label,
+        items: group.items || [],
+        groupIndex
+      }));
+    }
+
+    function getItems(categoryIndex, groupIndex) {
+      const category = menu[categoryIndex];
+      return Number(groupIndex) === -1
+        ? category.items
+        : category.subgroups[Number(groupIndex)].items;
+    }
+
+    function itemMatches(item, category, query) {
+      if (!query) return true;
+      return [item.name, item.desc, item.id, category.label].some(value =>
+        String(value || "").toLowerCase().includes(query)
+      );
+    }
+
+    function render() {
+      const query = searchInput.value.trim().toLowerCase();
+      editor.innerHTML = menu.map((category, categoryIndex) => {
+        const groups = allItems(category);
+        const visibleGroups = groups.map(group => ({
+          ...group,
+          items: group.items
+            .map((item, itemIndex) => ({ item, itemIndex }))
+            .filter(row => itemMatches(row.item, category, query))
+        })).filter(group => group.items.length || !query);
+
+        if (!visibleGroups.length && query) return "";
+
+        return `
+          <section class="category" data-category="${categoryIndex}">
+            <div class="category-title">
+              <h2>${esc(category.label)}</h2>
+              <span class="category-note">${visibleGroups.reduce((sum, group) => sum + group.items.length, 0)} items</span>
+            </div>
+            <div class="category-head">
+              <div>
+                <label>Number</label>
+                <input data-kind="category" data-field="num" data-category="${categoryIndex}" value="${esc(category.num)}">
+              </div>
+              <div>
+                <label>Category Name</label>
+                <input data-kind="category" data-field="label" data-category="${categoryIndex}" value="${esc(category.label)}">
+              </div>
+              <div>
+                <label>Note</label>
+                <input data-kind="category" data-field="note" data-category="${categoryIndex}" value="${esc(category.note)}">
+              </div>
+              ${category.items ? `<button class="secondary" type="button" data-action="add-item" data-category="${categoryIndex}" data-group="-1">Add Item</button>` : "<span></span>"}
+            </div>
+            ${visibleGroups.map(group => `
+              ${group.label ? `<div class="group-title">${esc(group.label)}</div>` : ""}
+              <div class="items">
+                ${group.items.length ? group.items.map(({ item, itemIndex }) => itemRow(item, categoryIndex, group.groupIndex, itemIndex)).join("") : '<p class="empty">No items in this category.</p>'}
+                ${group.groupIndex !== -1 ? `<button class="secondary" type="button" data-action="add-item" data-category="${categoryIndex}" data-group="${group.groupIndex}">Add ${esc(group.label)} Item</button>` : ""}
+              </div>
+            `).join("")}
+          </section>
+        `;
+      }).join("");
+    }
+
+    function itemRow(item, categoryIndex, groupIndex, itemIndex) {
+      return `
+        <div class="item${item.soldOut ? " soldout-row" : ""}" data-category="${categoryIndex}" data-group="${groupIndex}" data-item="${itemIndex}">
+          <div>
+            <label>Food Name</label>
+            <input data-kind="item" data-field="name" value="${esc(item.name)}">
+            <div class="item-id">ID: ${esc(item.id)}</div>
+          </div>
+          <div>
+            <label>Description</label>
+            <textarea data-kind="item" data-field="desc">${esc(item.desc)}</textarea>
+          </div>
+          <div>
+            <label>Price</label>
+            <input data-kind="item" data-field="price" type="number" min="0" step="0.01" value="${esc(item.price)}">
+          </div>
+          <label class="check">
+            <input data-kind="item" data-field="veg" type="checkbox"${item.veg ? " checked" : ""}>
+            Veg
+          </label>
+          <label class="check">
+            <input data-kind="item" data-field="soldOut" type="checkbox"${item.soldOut ? " checked" : ""}>
+            Sold out
+          </label>
+          <button class="danger" type="button" data-action="delete-item">Delete</button>
+        </div>
+      `;
+    }
+
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+        ...options
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Request failed");
+      return data;
+    }
+
+    async function loadMenu() {
+      menu = await api("/api/menu");
+      dirty = false;
+      render();
+      setStatus("Loaded " + menu.length + " categories");
+    }
+
+    async function saveMenu() {
+      const data = await api("/api/menu", {
+        method: "PUT",
+        body: JSON.stringify({ menu })
+      });
+      menu = data.menu;
+      dirty = false;
+      render();
+      setStatus("Saved to menu.json");
+    }
+
+    function showApp() {
+      loginScreen.style.display = "none";
+      app.style.display = "block";
+      loadMenu().catch(error => setStatus(error.message));
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const status = document.getElementById("loginStatus");
+      status.textContent = "Checking...";
+      try {
+        await api("/api/login", {
+          method: "POST",
+          body: JSON.stringify({
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+          })
+        });
+        showApp();
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    });
+
+    editor.addEventListener("input", event => {
+      const target = event.target;
+      if (target.dataset.kind === "category") {
+        menu[Number(target.dataset.category)][target.dataset.field] = target.value;
+        markDirty();
+        return;
+      }
+
+      if (target.dataset.kind === "item") {
+        const row = target.closest(".item");
+        const item = getItems(row.dataset.category, row.dataset.group)[Number(row.dataset.item)];
+        const field = target.dataset.field;
+        item[field] = target.type === "checkbox"
+          ? target.checked
+          : field === "price" ? Number(target.value || 0) : target.value;
+        if (field === "name" && (!item.id || item.id.startsWith("new-item"))) item.id = slugify(target.value);
+        markDirty();
+        if (target.type === "checkbox") render();
+      }
+    });
+
+    editor.addEventListener("click", event => {
+      const button = event.target.closest("button");
+      if (!button) return;
+
+      if (button.dataset.action === "add-item") {
+        const items = getItems(button.dataset.category, button.dataset.group);
+        items.push({
+          id: "new-item-" + Date.now(),
+          name: "New item",
+          desc: "",
+          price: 0,
+          veg: true,
+          soldOut: false
+        });
+        markDirty();
+        render();
+      }
+
+      if (button.dataset.action === "delete-item") {
+        const row = button.closest(".item");
+        const items = getItems(row.dataset.category, row.dataset.group);
+        items.splice(Number(row.dataset.item), 1);
+        markDirty();
+        render();
+      }
+    });
+
+    searchInput.addEventListener("input", render);
+    document.getElementById("saveBtn").addEventListener("click", () => saveMenu().catch(error => setStatus(error.message)));
+    document.getElementById("reloadBtn").addEventListener("click", () => {
+      if (dirty && !confirm("Discard unsaved changes and reload menu.json?")) return;
+      loadMenu().catch(error => setStatus(error.message));
+    });
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await api("/api/logout", { method: "POST", body: "{}" }).catch(() => {});
+      location.reload();
+    });
+
+    window.addEventListener("beforeunload", event => {
+      if (!dirty) return;
+      event.preventDefault();
+      event.returnValue = "";
+    });
+
+    api("/api/session")
+      .then(data => {
+        if (data.authenticated) showApp();
+      })
+      .catch(() => {});
+  </script>
+</body>
+
+</html>
