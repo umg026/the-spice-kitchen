@@ -1,16 +1,17 @@
-const fs = require("fs");
-const path = require("path");
-const { isAuthenticated } = require("./_auth");
+import { promises as fs } from "fs";
+import path from "path";
+import { NextResponse } from "next/server";
 
-const MENU_FILE = path.join(process.cwd(), "menu.json");
+const MENU_FILE = path.join(process.cwd(), "..", "menu.json");
 const MENU_BLOB_PATH = process.env.MENU_BLOB_PATH || "menu.json";
 
-function hasBlobConfig() {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID || process.env.VERCEL_OIDC_TOKEN);
-}
+export const dynamic = "force-dynamic";
 
-async function blobSdk() {
-  return import("@vercel/blob");
+function json(data, status = 200) {
+  return NextResponse.json(data, {
+    status,
+    headers: { "Cache-Control": "no-store" }
+  });
 }
 
 function slugify(value) {
@@ -24,10 +25,9 @@ function slugify(value) {
 
 function normalizeItem(item) {
   const name = String(item.name || "New item").trim();
-  const id = slugify(item.id || name);
   const price = Number(item.price);
   const next = {
-    id,
+    id: slugify(item.id || name),
     name,
     desc: String(item.desc || "").trim(),
     price: Number.isFinite(price) && price >= 0 ? Math.round(price * 100) / 100 : 0,
@@ -66,13 +66,21 @@ function normalizeMenu(menu) {
   });
 }
 
-function readMenuFile() {
-  return JSON.parse(fs.readFileSync(MENU_FILE, "utf8"));
+function hasBlobConfig() {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID || process.env.VERCEL_OIDC_TOKEN);
 }
 
-function writeMenuFile(menu) {
+async function blobSdk() {
+  return import("@vercel/blob");
+}
+
+async function readMenuFile() {
+  return JSON.parse(await fs.readFile(MENU_FILE, "utf8"));
+}
+
+async function writeMenuFile(menu) {
   const normalized = normalizeMenu(menu);
-  fs.writeFileSync(MENU_FILE, JSON.stringify(normalized, null, 2) + "\n");
+  await fs.writeFile(MENU_FILE, JSON.stringify(normalized, null, 2) + "\n");
   return normalized;
 }
 
@@ -138,39 +146,42 @@ function deleteMenuEntry(menu, categoryId, itemId) {
   throw new Error("Item not found");
 }
 
-module.exports = async function handler(req, res) {
-  res.setHeader("Cache-Control", "no-store");
+function isAuthorized(request, body = {}) {
+  const secret = process.env.MENU_API_SECRET || "umang@9328641633";
+  return request.headers.get("x-menu-api-secret") === secret || body.secret === secret;
+}
 
+export async function GET() {
   try {
-    if (req.method === "GET") {
-      res.status(200).json(await readMenu());
-      return;
-    }
-
-    if (!isAuthenticated(req)) {
-      res.status(401).json({ error: "Not authenticated" });
-      return;
-    }
-
-    if (req.method === "PUT") {
-      const menu = await writeMenu((req.body || {}).menu);
-      res.status(200).json({ success: true, menu });
-      return;
-    }
-
-    if (req.method === "DELETE") {
-      const menu = await writeMenu(deleteMenuEntry(
-        await readMenu(),
-        (req.body || {}).categoryId || req.query.categoryId,
-        (req.body || {}).itemId || req.query.itemId
-      ));
-      res.status(200).json({ success: true, menu });
-      return;
-    }
-
-    res.setHeader("Allow", "GET, PUT, DELETE");
-    res.status(405).json({ error: "Method not allowed" });
+    return json(await readMenu());
   } catch (error) {
-    res.status(500).json({ error: error.message || "Menu API failed" });
+    return json({ error: error.message || "Menu API failed" }, 500);
   }
-};
+}
+
+export async function PUT(request) {
+  try {
+    const body = await request.json().catch(() => ({}));
+    if (!isAuthorized(request, body)) return json({ error: "Not authorized" }, 401);
+    const menu = await writeMenu(body.menu);
+    return json({ success: true, menu });
+  } catch (error) {
+    return json({ error: error.message || "Menu API failed" }, 500);
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    const body = await request.json().catch(() => ({}));
+    if (!isAuthorized(request, body)) return json({ error: "Not authorized" }, 401);
+    const url = new URL(request.url);
+    const menu = await writeMenu(deleteMenuEntry(
+      await readMenu(),
+      body.categoryId || url.searchParams.get("categoryId"),
+      body.itemId || url.searchParams.get("itemId")
+    ));
+    return json({ success: true, menu });
+  } catch (error) {
+    return json({ error: error.message || "Menu API failed" }, 500);
+  }
+}

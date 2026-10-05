@@ -119,6 +119,43 @@ function normalizeMenu(menu) {
   });
 }
 
+function deleteMenuEntry(menu, categoryId, itemId) {
+  const categoryIndex = menu.findIndex(category => category.id === categoryId);
+  if (categoryIndex === -1) throw new Error("Category not found");
+
+  if (!itemId) {
+    menu.splice(categoryIndex, 1);
+    return menu;
+  }
+
+  const category = menu[categoryIndex];
+  const collections = [];
+  if (Array.isArray(category.items)) collections.push(category.items);
+  if (Array.isArray(category.subgroups)) {
+    category.subgroups.forEach(subgroup => {
+      if (Array.isArray(subgroup.items)) collections.push(subgroup.items);
+    });
+  }
+
+  for (const items of collections) {
+    const itemIndex = items.findIndex(item => item.id === itemId);
+    if (itemIndex !== -1) {
+      items.splice(itemIndex, 1);
+      return menu;
+    }
+  }
+
+  throw new Error("Item not found");
+}
+
+function writeMenu(menu) {
+  const json = JSON.stringify(normalizeMenu(menu), null, 2) + "\n";
+  const tmpFile = MENU_FILE + ".tmp";
+  fs.writeFileSync(tmpFile, json);
+  fs.renameSync(tmpFile, MENU_FILE);
+  return JSON.parse(json);
+}
+
 async function handleApi(req, res, pathname) {
   if (pathname === "/api/session" && req.method === "GET") {
     sendJSON(res, 200, { authenticated: isAuthed(req) });
@@ -163,11 +200,18 @@ async function handleApi(req, res, pathname) {
 
   if (pathname === "/api/menu" && req.method === "PUT") {
     const body = JSON.parse(await readBody(req) || "{}");
-    const menu = normalizeMenu(body.menu);
-    const json = JSON.stringify(menu, null, 2) + "\n";
-    const tmpFile = MENU_FILE + ".tmp";
-    fs.writeFileSync(tmpFile, json);
-    fs.renameSync(tmpFile, MENU_FILE);
+    const menu = writeMenu(body.menu);
+    sendJSON(res, 200, { success: true, menu });
+    return;
+  }
+
+  if (pathname === "/api/menu" && req.method === "DELETE") {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const body = JSON.parse(await readBody(req) || "{}");
+    const categoryId = body.categoryId || url.searchParams.get("categoryId");
+    const itemId = body.itemId || url.searchParams.get("itemId");
+    const currentMenu = JSON.parse(fs.readFileSync(MENU_FILE, "utf8"));
+    const menu = writeMenu(deleteMenuEntry(currentMenu, categoryId, itemId));
     sendJSON(res, 200, { success: true, menu });
     return;
   }

@@ -441,13 +441,6 @@
         "desc": "Soft, fluffy tandoor-baked naan brushed generously with melted butter.",
         "price": 1.99,
         "veg": true
-      },
-      {
-        "id": "bhature",
-        "name": "Bhature (1pc)",
-        "desc": "Soft, fluffy deep-fried bread, the classic partner to chole.",
-        "price": 1.99,
-        "veg": true
       }
     ]
   },
