@@ -4191,7 +4191,7 @@
     const CONFIG = {
       whatsappNumber: "447760772562",     // WhatsApp number, digits only, country code, no + or spaces
       email: "thespicekitchen7@gmail.com",
-      trackingEndpoint: "https://script.google.com/macros/s/AKfycbwJO41um9Sa_KAXspfmau-vPWyxmKqNSqHVyHxhHqZ_i_tbk5PON5zrMqGojxDszlvo/exec",
+      trackingEndpoint: "https://script.google.com/macros/s/AKfycbxqXIvVm_k69OHokX43oG_vBmXBSMT2-28VbAVZFk-qFh_arHsDBuDh_riXV3IUeEnX/exec",
       phoneDisplay: "+44 7760 772562",
       deliveryArea: "Sheffield",
       hours: {
@@ -4206,46 +4206,140 @@
     };
 
     /* ---------------- MENU DATA ---------------- */
-    let MENU = [];
-    let ITEM_INDEX = {};
+    const MENU = [
+      {
+        id: "starters", label: "Starters", num: "01",
+        note: "Wok-fired and tandoor-fried, made to order.",
+        items: [
+          { id: "p-chilli", name: "Paneer Chilli", desc: "Crispy paneer tossed in a spicy chilli, garlic & soy sauce.", price: 6.99, veg: true },
+          { id: "veg-manch", soldOut: true, name: "Veg Manchurian", desc: "Crispy vegetable dumplings tossed in a rich Manchurian sauce.", price: 6.99, veg: true },
+          { id: "chilli-chicken", name: "Chilli Chicken", desc: "Crispy chicken tossed with fresh chilli, peppers & Indo-Chinese sauce.", price: 6.99, veg: false },
+          { id: "chicken-manch", name: "Chicken Manchurian", desc: "Tender chicken tossed in a rich, tangy Manchurian gravy.", price: 6.99, veg: false },
+          { id: "chicken-majestic", name: "Dragon Chicken", desc: "Crispy chicken strips tossed in a creamy, spicy house sauce.", price: 6.99, veg: false },
+          { id: "egg-bhaji", name: "Egg Pakoda", desc: "Hard-boiled eggs coated in a thick, seasoned chickpea flour (gram flour/besan) batter and deep-fried until golden brown and intensely crispy.", price: 1.99, veg: false },
+          { id: "honey-chilli-potato", name: "Honey Chilli Potato", soldOut: false, desc: "Crispy potato tossed in a sweet, spicy honey-chilli glaze.", price: 6.49, veg: true },
+          { id: "dragon-paneer", name: "Dragon Paneer", desc: "Crispy paneer tossed in a fiery, tangy dragon sauce with peppers & spring onion.", price: 6.99, veg: true }
+        ]
+      },
+      {
+        id: "fried-rice", label: "Fried Rice", num: "04",
+        note: "Fragrant basmati, wok-tossed to order.",
+        items: [
+          { id: "veg-fried-rice", name: "Veg Fried Rice", desc: "Fragrant rice wok-tossed with garden vegetables & oriental seasoning.", price: 5.99, veg: true },
+          { id: "chicken-fried-rice", name: "Chicken Fried Rice", desc: "Fragrant rice wok-tossed with tender chicken & fresh vegetables.", price: 6.99, veg: false },
+          { id: "cegg-fried-rice", name: "C & Egg Fried Rice", desc: "Wok-tossed rice with chicken, egg & aromatic oriental seasoning.", price: 7.99, veg: false },
+          { id: "egg-fried-rice", name: "Egg Fried Rice", desc: "Fluffy egg and fragrant rice wok-tossed with fresh vegetables.", price: 5.99, veg: true },
+          { id: "paneer-fried-rice", name: "Paneer Fried Rice", desc: "Fragrant rice tossed with golden paneer, vegetables & oriental sauces.", price: 6.99, veg: true },
+          { id: "veg-manch-fried-rice",  soldOut: true, name: "Veg Manchurian Fried Rice", desc: "Wok-tossed fried rice topped with crispy vegetable Manchurian.", price: 6.49, veg: true },
+          { id: "mushroom-rice", name: "Mushroom Rice", desc: "Fragrant rice tossed with juicy mushrooms, vegetables & aromatic seasoning.", price: 5.99, veg: true }
+        ],
+      },
+      {
+        id: "noodles", label: "Noodles", num: "02",
+        note: "Hakka-style noodles, wok-tossed to order.",
+        items: [
+          { id: "veg-noodles", name: "Veg Noodles", desc: "Wok-tossed noodles with crunchy vegetables & oriental sauces.", price: 5.99, veg: true },
+          { id: "chicken-noodles", name: "Chicken Noodles", desc: "Wok-tossed noodles with tender chicken, vegetables & spicy house sauce.", price: 6.99, veg: false },
+          { id: "cegg-noodles", name: "C & Egg Noodles", desc: "Noodles tossed with chicken, egg, vegetables & oriental seasoning.", price: 7.99, veg: false },
+          { id: "egg-noodles", name: "Egg Noodles", desc: "Noodles tossed with fluffy egg, vegetables & aromatic sauces.", price: 5.99, veg: true },
+          { id: "paneer-noodles", name: "Paneer Noodles", desc: "Noodles tossed with paneer, crunchy vegetables & spicy Indo-Chinese sauce.", price: 6.99, veg: true },
+          { id: "veg-manch-noodles",  soldOut: true, name: "Veg Manchurian Noodles", desc: "Wok-tossed noodles topped with crispy vegetable Manchurian.", price: 6.49, veg: true },
+          { id: "mushroom-noodles", name: "Mushroom Noodles", desc: "Wok-tossed noodles with juicy mushrooms, vegetables & aromatic seasoning.", price: 5.99, veg: true },
+          { id: "veg-hakka-noodles", name: "Veg Hakka Noodles", desc: "Classic Hakka-style noodles tossed with crisp vegetables & soy seasoning.", price: 5.99, veg: true },
+          { id: "chicken-hakka-noodles", name: "Chicken Hakka Noodles", desc: "Classic Hakka-style noodles wok-tossed with chicken & soy seasoning.", price: 6.99, veg: false },
+          { id: "egg-hakka-noodles", name: "Egg Hakka Noodles", desc: "Classic Hakka-style noodles wok-tossed with fluffy egg & soy seasoning.", price: 6.49, veg: false }
+        ],
+      },
+      {
+        id: "curries", label: "Curries", num: "05",
+        note: "Slow-cooked gravies, finished to order.",
+        subgroups: [
+          {
+            label: "Veg Curry", items: [
+              { id: "paneer-butter-masala", soldOut: false, name: "Paneer Butter Masala", desc: "Soft paneer in a rich tomato-butter gravy finished with cream.", price: 7.99, veg: true },
+              { id: "kadai-paneer", name: "Kadai Paneer", soldOut: false, desc: "Paneer cooked with peppers, onion & freshly ground kadai spices.", price: 7.99, veg: true },
+              { id: "sev-tamatar", name: "Sev Tamatar", desc: "Tangy tomato gravy topped with crispy sev & aromatic Indian spices.", price: 6.99, veg: true },
+              { id: "bhindi-masala", name: "Bhindi Masala", desc: "Tender okra cooked with onion, tomato & traditional Indian spices.", price: 6.99, veg: true },
+              { id: "rajma", name: "Rajma", desc: "Slow-cooked kidney beans in a rich, homestyle onion-tomato gravy.", price: 6.99, veg: true },
+              { id: "amritsari-chole-bhature", name: "Amritsari Chole Bhature", desc: "Slow-cooked chickpeas in a bold Amritsari masala, served with fluffy fried bhature.", price: 7.99, veg: true }
+            ],
+          },
+          {
+            label: "Non-Veg Curry", items: [
+              { id: "chicken-bhuna", name: "Chicken Bhuna", desc: "Tender chicken simmered in a thick, richly spiced onion-tomato masala.", price: 7.99, veg: false },
+              { id: "chicken-butter-masala", soldOut: false, name: "Chicken Butter Masala", desc: "Tender chicken in a rich buttery tomato gravy finished with cream.", price: 7.99, veg: false },
+              { id: "chicken-karai", soldOut: false, name: "Chicken Karai", desc: "Tender chicken cooked with peppers, tomato, onion & bold kadai spices.", price: 7.99, veg: false },
+              { id: "egg-kari", name: "Egg Kari", desc: "Boiled eggs simmered in a rich, aromatic onion-tomato curry.", price: 6.99, veg: false },
+              { id: "spice-special-egg-curry", name: "Spice Special Egg Curry", desc: "Our house-special egg curry, simmered in a rich, bold masala gravy.", price: 7.49, veg: false }
+            ]
+          }
+        ]
+      },
+      {
+        id: "dal-rice", label: "Dal & Rice", num: "06",
+        note: "Comforting, homestyle & tempered with ghee.",
+        items: [
+          { id: "rajma-chawal", name: "Rajma Chawal", desc: "Comforting rajma served with fragrant steamed basmati rice.", price: 7.99, veg: true },
+          { id: "chole-chawal", name: "Chole Chawal", desc: "Spiced Amritsari chole served with fluffy basmati rice.", price: 7.99, veg: true },
+          { id: "jeera-dal-tadka", name: "Jeera Rice & Dal Tadka", desc: "Fragrant cumin rice served with creamy dal finished with a sizzling tadka.", price: 6.99, veg: true },
+          { id: "dal", name: "Dal Tadka", desc: "Homestyle lentils slow-cooked with aromatic spices & a traditional tadka.", price: 5.99, veg: true },
+          { id: "plain-rice", name: "Plain Rice", desc: "Fluffy steamed basmati rice, perfect with any curry.", price: 4.99, veg: true },
+          { id: "jeera-rice", name: "Jeera Rice", desc: "Fragrant basmati rice tempered with roasted cumin & ghee.", price: 5.99, veg: true }
+        ]
+      },
+      {
+        id: "specials", label: "Chef's Specials", num: "07",
+        note: "Signature dishes you won't find on every menu.",
+        items: [
+          { id: "spice-special-paneer-masala", name: "The Spice Special Paneer Masala", desc: "Our house-special paneer curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: true },
+          { id: "spice-special-chicken-masala", name: "The Spice Special Chicken Masala", desc: "Our house-special chicken curry, simmered in a rich, bold masala gravy.", price: 7.99, veg: false },
+          { id: "ghee-pepper-papadam-curry", name: "Ghee Pepper Papadam Curry", desc: "Crisp papadam simmered in a peppery ghee-roasted curry, finished with cracked pepper.", price: 6.99, veg: true },
+          { id: "cheese-anguri", soldOut: false, name: "Cheese Anguri (Butter Masala)", desc: "Soft cheese dumplings in a rich, creamy butter masala gravy.", price: 8.99, veg: true }
+        ]
+      },
+      {
+        id: "sides", label: "Sides & Snacks", num: "08",
+        note: "Perfect on the side, or on their own.",
+        items: [
+          { id: "french-fries", name: "French Fries 🍟", desc: "Golden, crispy fries, lightly salted.", price: 2.99, veg: true },
+          { id: "loaded-cheese-fries", name: "Loaded Cheese French Fries", desc: "Crispy fries loaded with melted cheese.", price: 4.49, veg: true },
+          { id: "peri-peri-chips", name: "Peri Peri Chips", desc: "Crispy chips tossed in a bold, tangy peri peri seasoning.", price: 3.49, veg: true },
+          { id: "papadam-2pc", name: "Papadam (2pcs)", desc: "Crisp, roasted papadam, served plain.", price: 1.99, veg: true },
+          { id: "chicken-samosa-3pc", name: "Chicken Samosa (3 pcs)", desc: "Crispy pastry parcels filled with a savoury spiced chicken filling.", price: 3.49, veg: false },
+          { id: "veg-samosa-3pc", name: "Veg Samosa (3 pcs)", desc: "Crispy pastry parcels filled with a savoury spiced vegetable filling.", price: 3.49, veg: true }
+        ]
+      },
+      {
+        id: "breads", label: "Breads", num: "03",
+        note: "Fresh from the tandoor, to go with any curry.",
+        items: [
+          { id: "butter-naan", name: "Butter Naan", desc: "Soft, fluffy tandoor-baked naan brushed generously with melted butter.", price: 1.99, veg: true },
+          // { id: "garlic-naan", name: "Garlic Naan", desc: "Tandoor-baked naan topped with fresh garlic & coriander.", price: 2.49, veg: true },
+          { id: "bhature", name: "Bhature (1pc)", desc: "Soft, fluffy deep-fried bread, the classic partner to chole.", price: 1.99, veg: true }
+        ],
+      },
+      {
+        id: "desserts", label: "Sweets & Lassi", num: "09",
+        note: "A sweet finish, chilled or warm.",
+        items: [
+          // { id: "gulab-jamun", name: "Gulab Jamun (3pcs)", desc: "Soft milk dumplings soaked in warm rose & cardamom syrup.", price: 2.99, veg: true },
+          { id: "salted-lassi", name: "Salted Lassi", desc: "Chilled, churned yoghurt drink, lightly salted.", price: 1.99, veg: true },
+          { id: "sweet-lassi", name: "Sweet Lassi", desc: "Chilled, churned yoghurt drink, lightly sweetened.", price: 2.99, veg: true },
+          { id: "mango-lassi", name: "Mango Lassi", desc: "Chilled, churned yoghurt drink blended with sweet mango.", price: 3.99, veg: true }
+        ]
+      }
+    ];
 
     /* flat lookup of every sellable item, incl. category add-ons */
-    function rebuildItemIndex() {
-      ITEM_INDEX = {};
-      MENU.forEach(cat => {
-        (cat.items || []).forEach(it => ITEM_INDEX[it.id] = it);
-        (cat.subgroups || []).forEach(sg => {
-          (sg.items || []).forEach(it => ITEM_INDEX[it.id] = it);
-          if (sg.addon) ITEM_INDEX[sg.addon.id] = sg.addon;
-        });
-        if (cat.addon) ITEM_INDEX[cat.addon.id] = cat.addon;
+    const ITEM_INDEX = {};
+    MENU.forEach(cat => {
+      (cat.items || []).forEach(it => ITEM_INDEX[it.id] = it);
+      (cat.subgroups || []).forEach(sg => {
+        sg.items.forEach(it => ITEM_INDEX[it.id] = it);
+        if (sg.addon) ITEM_INDEX[sg.addon.id] = sg.addon;
       });
-    }
-
-    async function loadMenuData({ rerender = false } = {}) {
-      let response = await fetch("/api/menu?v=" + Date.now(), { cache: "no-store" });
-      if (!response.ok) {
-        response = await fetch("menu.json?v=" + Date.now(), { cache: "no-store" });
-      }
-      if (!response.ok) throw new Error("Could not load menu");
-      const nextMenu = await response.json();
-      const changed = JSON.stringify(nextMenu) !== JSON.stringify(MENU);
-      MENU = nextMenu;
-      rebuildItemIndex();
-      if (rerender && changed) {
-        Object.keys(cart).forEach(id => {
-          if (!ITEM_INDEX[id] || ITEM_INDEX[id].soldOut) delete cart[id];
-        });
-        renderCategoryPicker();
-        renderMenu();
-        renderPopular();
-        renderMarquee();
-        renderCart();
-        bindTabs();
-        bindMenuEvents();
-        showToast("Menu updated");
-      }
-    }
+      if (cat.addon) ITEM_INDEX[cat.addon.id] = cat.addon;
+    });
 
     /* ---------------- STATE ---------------- */
     const cart = {}; // { itemId: qty }
@@ -4255,19 +4349,12 @@
     const fmt = n => "£" + n.toFixed(2);
     const $ = sel => document.querySelector(sel);
     const $all = sel => Array.from(document.querySelectorAll(sel));
-    const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[ch]));
 
     /* All prices in MENU are shown struck-through as the "before discount" price;
        customers are actually charged this DISCOUNT_RATE% off. */
     const DISCOUNT_RATE = 0.25;
     const discountedPrice = price => Math.round(price * (1 - DISCOUNT_RATE) * 100) / 100;
-    const priceOf = id => ITEM_INDEX[id] ? discountedPrice(ITEM_INDEX[id].price) : 0;
+    const priceOf = id => discountedPrice(ITEM_INDEX[id].price);
 
     function vegIconSVG(isVeg) {
       return isVeg
@@ -4361,24 +4448,24 @@
     function dishCard(item, withImage = true) {
       const soldOut = !!item.soldOut;
       const qty = soldOut ? 0 : (cart[item.id] || 0);
-      const imageBlock = withImage ? `<div class="dish-photo"><img src="${escapeHTML(foodImageFor(item))}" alt="${escapeHTML(item.name)}" loading="lazy"></div>` : "";
+      const imageBlock = withImage ? `<div class="dish-photo"><img src="${foodImageFor(item)}" alt="${item.name}" loading="lazy"></div>` : "";
       return `
-  <div class="dish-card${withImage ? " has-image" : ""}${soldOut ? " sold-out" : ""}" data-veg="${item.veg}" data-id="${escapeHTML(item.id)}">
+  <div class="dish-card${withImage ? " has-image" : ""}${soldOut ? " sold-out" : ""}" data-veg="${item.veg}" data-id="${item.id}">
     ${soldOut ? '<span class="sold-out-badge">Out of Stock</span>' : ""}
     ${imageBlock}
     <div class="dish-content">
       <div class="dish-top">
-        <div class="dish-title-row">${vegIconSVG(item.veg)}<span class="dish-name">${escapeHTML(item.name)}</span></div>
+        <div class="dish-title-row">${vegIconSVG(item.veg)}<span class="dish-name">${item.name}</span></div>
         <span class="dish-price"><s class="price-original">${fmt(item.price)}</s><span class="price-final">${fmt(discountedPrice(item.price))}</span></span>
       </div>
-      <p class="dish-desc">${escapeHTML(item.desc)}</p>
+      <p class="dish-desc">${item.desc}</p>
       <div class="dish-bottom">
-        <div class="qty-stepper" data-id="${escapeHTML(item.id)}">
+        <div class="qty-stepper" data-id="${item.id}">
           <button type="button" class="qty-minus" aria-label="Decrease quantity"${soldOut ? " disabled" : ""}>−</button>
           <span class="qty-val">${qty}</span>
           <button type="button" class="qty-plus" aria-label="Increase quantity"${soldOut ? " disabled" : ""}>+</button>
         </div>
-        <button type="button" class="add-btn" data-id="${escapeHTML(item.id)}"${soldOut ? " disabled" : ""}>${soldOut ? "Out of Stock" : "Add to Cart"}</button>
+        <button type="button" class="add-btn" data-id="${item.id}"${soldOut ? " disabled" : ""}>${soldOut ? "Out of Stock" : "Add to Cart"}</button>
       </div>
     </div>
   </div>`;
@@ -4388,21 +4475,21 @@
       const qty = cart[addon.id] || 0;
       const hasPhoto = !addon.id.startsWith("chilli-garlic-");
       return `
-  <div class="naan-strip${hasPhoto ? "" : " no-photo"}" data-id="${escapeHTML(addon.id)}">
-    ${hasPhoto ? `<div class="addon-photo"><img src="${escapeHTML(foodImageFor(addon))}" alt="${escapeHTML(addon.name)}" loading="lazy"></div>` : ""}
+  <div class="naan-strip${hasPhoto ? "" : " no-photo"}" data-id="${addon.id}">
+    ${hasPhoto ? `<div class="addon-photo"><img src="${foodImageFor(addon)}" alt="${addon.name}" loading="lazy"></div>` : ""}
     <div class="info">
       ${vegIconSVG(addon.veg)}
       <div>
-        <strong>${escapeHTML(addon.name)}</strong><br>
-        <span>${escapeHTML(addon.desc)}</span>
+        <strong>${addon.name}</strong><br>
+        <span>${addon.desc}</span>
       </div>
     </div>
-    <div class="qty-stepper" data-id="${escapeHTML(addon.id)}">
+    <div class="qty-stepper" data-id="${addon.id}">
       <button type="button" class="qty-minus" aria-label="Decrease quantity">−</button>
       <span class="qty-val">${qty}</span>
       <button type="button" class="qty-plus" aria-label="Increase quantity">+</button>
     </div>
-    <button type="button" class="add-btn btn-sm" data-id="${escapeHTML(addon.id)}">Add · <span class="addon-price"><span class="price-final">${fmt(discountedPrice(addon.price))}</span></span></button>
+    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <span class="addon-price"><span class="price-final">${fmt(discountedPrice(addon.price))}</span></span></button>
   </div>`;
     }
 
@@ -4423,9 +4510,9 @@
       const grid = $("#catPickerGrid");
       const categoryOrder = ["starters", "fried-rice", "noodles", "curries", "dal-rice", "specials", "sides", "breads", "desserts"];
       grid.innerHTML = categoryOrder.map(id => MENU.find(cat => cat.id === id)).filter(Boolean).map(cat => `
-    <button type="button" class="cat-tile" data-cat="${escapeHTML(cat.id)}">
-      <span class="cat-tile-photo"><img src="${escapeHTML(CAT_TILE_IMAGES[cat.id] || FOOD_IMAGES.default)}" alt="${escapeHTML(cat.label)}" loading="lazy"></span>
-      <span class="cat-tile-label">${escapeHTML(cat.label)}</span>
+    <button type="button" class="cat-tile" data-cat="${cat.id}">
+      <span class="cat-tile-photo"><img src="${CAT_TILE_IMAGES[cat.id] || FOOD_IMAGES.default}" alt="${cat.label}" loading="lazy"></span>
+      <span class="cat-tile-label">${cat.label}</span>
     </button>`).join("");
 
       $all(".cat-tile", grid).forEach(tile => {
@@ -4468,7 +4555,7 @@
     function renderMenu() {
       const mount = $("#menuMount");
       const tabs = $("#catTabs");
-      tabs.innerHTML = MENU.map(cat => `<button type="button" class="cat-tab" data-target="${escapeHTML(cat.id)}">${escapeHTML(cat.label)}</button>`).join("");
+      tabs.innerHTML = MENU.map(cat => `<button type="button" class="cat-tab" data-target="${cat.id}">${cat.label}</button>`).join("");
 
       mount.innerHTML = MENU.map(cat => {
         let body = "";
@@ -4483,9 +4570,9 @@
         }
         if (cat.addon) body += addonStrip(cat.addon);
         return `
-    <div class="menu-category" id="cat-${escapeHTML(cat.id)}">
-      <div class="menu-category-head"><span class="num">${escapeHTML(cat.num)}</span><h3>${escapeHTML(cat.label)}</h3></div>
-      <p class="menu-category-note">${escapeHTML(cat.note || "")}</p>
+    <div class="menu-category" id="cat-${cat.id}">
+      <div class="menu-category-head"><span class="num">${cat.num}</span><h3>${cat.label}</h3></div>
+      <p class="menu-category-note">${cat.note}</p>
       ${body}
     </div>`;
       }).join("");
@@ -4604,7 +4691,7 @@
           return `
       <div class="cart-line" data-id="${id}">
         <div class="cart-line-info">
-          <strong>${escapeHTML(item.name)}</strong>
+          <strong>${item.name}</strong>
           <span>${fmt(unit)} each</span>
         </div>
         <div class="cart-line-right">
@@ -4643,8 +4730,7 @@
       const entries = Object.entries(cart);
       lines.innerHTML = entries.map(([id, qty]) => {
         const item = ITEM_INDEX[id];
-        if (!item) return "";
-        return `<div class="recap-line"><span>${escapeHTML(item.name)} × ${qty}</span><span>${fmt(priceOf(id) * qty)}</span></div>`;
+        return `<div class="recap-line"><span>${item.name} × ${qty}</span><span>${fmt(priceOf(id) * qty)}</span></div>`;
       }).join("");
       $("#recapTotal").textContent = fmt(cartTotal());
     }
@@ -4912,7 +4998,7 @@
     function renderMarquee() {
       const names = MENU.flatMap(c => c.items ? c.items.map(i => i.name) : c.subgroups.flatMap(sg => sg.items.map(i => i.name)));
       const track = $("#marqueeTrack");
-      const chunk = names.map(n => `<span>${escapeHTML(n)}</span>`).join("");
+      const chunk = names.map(n => `<span>${n}</span>`).join("");
       track.innerHTML = chunk + chunk; // duplicate for seamless loop
     }
 
@@ -4979,20 +5065,9 @@
     }
 
     /* ---------------- INIT ---------------- */
-    document.addEventListener("DOMContentLoaded", async () => {
+    document.addEventListener("DOMContentLoaded", () => {
       initTheme();
       applyConfig();
-      try {
-        await loadMenuData();
-      } catch (error) {
-        console.error(error);
-        const mount = $("#menuMount");
-        if (mount) {
-          mount.innerHTML = '<p class="menu-category-note">Menu is currently unavailable. Please refresh in a moment.</p>';
-        }
-        showToast("Could not load menu");
-        return;
-      }
       renderCategoryPicker();
       renderMenu();
       renderPopular();
@@ -5037,9 +5112,6 @@
       document.addEventListener("keydown", e => {
         if (e.key === "Escape") { closeCart(); closeCheckout(); closeCategoryModal(); closeNav(); }
       });
-
-      window.addEventListener("focus", () => loadMenuData({ rerender: true }).catch(console.warn));
-      window.setInterval(() => loadMenuData({ rerender: true }).catch(console.warn), 15000);
     });
 
     /* ================= OFFER POPUP ================= */
