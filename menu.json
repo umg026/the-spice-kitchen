@@ -451,6 +451,13 @@
     "note": "A sweet finish, chilled or warm.",
     "items": [
       {
+        "id": "gulab-jamun",
+        "name": "Gulab Jamun (3pcs)",
+        "desc": "Soft milk dumplings soaked in warm rose & cardamom syrup.",
+        "price": 2.99,
+        "veg": true
+      },
+      {
         "id": "salted-lassi",
         "name": "Salted Lassi",
         "desc": "Chilled, churned yoghurt drink, lightly salted.",
