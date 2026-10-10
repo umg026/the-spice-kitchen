@@ -4983,17 +4983,23 @@
       const number = CONFIG.whatsappNumber.replace(/[^\d]/g, "");
       window.open(`https://wa.me/${number}?text=${waText}`, "_blank");
 
-      const subject = encodeURIComponent("New Order — The Spice Kitchen (" + $("#custName").value.trim() + ")");
-      const body = encodeURIComponent(buildEmailMessage());
-      window.location.href = `mailto:${CONFIG.email}?subject=${subject}&body=${body}`;
-
-      showToast("Order sent — WhatsApp & Email opened");
+      showToast("Order sent — WhatsApp opened");
 
       trackOrder();
-      window.Track?.event("order_submit", ensureOrderId(), cartTotal(), { payment: getPaymentMethod(), items: cartCount(), area: ($("#custPostcode").value.trim().toUpperCase().split(/\s+/)[0] || "") });
+
+      window.Track?.event(
+        "order_submit",
+        ensureOrderId(),
+        cartTotal(),
+        {
+          payment: getPaymentMethod(),
+          items: cartCount(),
+          area: ($("#custPostcode").value.trim().toUpperCase().split(/\s+/)[0] || "")
+        }
+      );
+
       window.Track?.flush(true);
     }
-
     function copyOrder() {
       if (!validateForm()) return;
       window.Track?.event("copy_order", ensureOrderId(), cartTotal());
