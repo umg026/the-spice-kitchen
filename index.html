@@ -1936,6 +1936,58 @@
       transform: translateX(0);
     }
 
+    .discount-celebration {
+      position: fixed;
+      z-index: 120;
+      top: 18px;
+      left: 50%;
+      transform: translate(-50%, -16px);
+      padding: 14px 22px;
+      border: 1px solid var(--gold-bright);
+      border-radius: 999px;
+      background: #000;
+      color: var(--gold-bright);
+      box-shadow: 0 12px 36px #0008;
+      font-family: var(--ff-display);
+      font-weight: 700;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .discount-celebration.show {
+      visibility: visible;
+      animation: discount-celebrate 3.2s ease both;
+    }
+
+    .discount-celebration .confetti {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: var(--gold-bright);
+      font-size: 19px;
+      animation: confetti-pop 1.15s ease-out both;
+      pointer-events: none;
+    }
+
+    .discount-celebration .confetti:nth-child(2) { --x: -105px; --y: -52px; }
+    .discount-celebration .confetti:nth-child(3) { --x: 112px; --y: -48px; color: #ef7d58; }
+    .discount-celebration .confetti:nth-child(4) { --x: -124px; --y: 38px; color: #f7e6a1; }
+    .discount-celebration .confetti:nth-child(5) { --x: 125px; --y: 36px; }
+
+    @keyframes discount-celebrate {
+      0% { opacity: 0; transform: translate(-50%, -16px) scale(.92); }
+      12%, 78% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -8px) scale(.98); }
+    }
+
+    @keyframes confetti-pop {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.4) rotate(0); }
+      18% { opacity: 1; }
+      100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1.2) rotate(150deg); }
+    }
+
     .drawer-head {
       display: flex;
       align-items: center;
@@ -4008,6 +4060,13 @@
 
   <!-- ================= CART DRAWER ================= -->
   <div class="overlay" id="overlay"></div>
+  <div class="discount-celebration" id="discountCelebration" role="status" aria-live="polite">
+    <span class="confetti" aria-hidden="true">✦</span>
+    <span class="confetti" aria-hidden="true">✦</span>
+    <span class="confetti" aria-hidden="true">✦</span>
+    <span class="confetti" aria-hidden="true">✦</span>
+    🎉 You’ve unlocked 15% off!
+  </div>
 
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
     <div class="drawer-head">
@@ -4030,6 +4089,8 @@
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="drawer-foot" id="cartFoot">
+      <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal">&pound;0.00</span></div>
+      <div class="summary-row" id="cartDiscountRow" hidden><span>15% discount(Above &pound;25)</span><span id="cartDiscount">−&pound;0.00</span></div>
       <div class="summary-row total"><span>Total</span><span id="cartTotal">&pound;0.00</span></div>
       <button class="btn btn-primary btn-block" id="checkoutBtn" disabled>Checkout</button>
     </div>
@@ -4370,11 +4431,10 @@
     const $ = sel => document.querySelector(sel);
     const $all = sel => Array.from(document.querySelectorAll(sel));
 
-    /* All prices in MENU are shown struck-through as the "before discount" price;
-       customers are actually charged this DISCOUNT_RATE% off. */
-    const DISCOUNT_RATE = 0.25;
-    const discountedPrice = price => Math.round(price * (1 - DISCOUNT_RATE) * 100) / 100;
-    const priceOf = id => discountedPrice(ITEM_INDEX[id].price);
+    const priceOf = id => ITEM_INDEX[id].price;
+    const cartSubtotal = () => Object.entries(cart).reduce((sum, [id, qty]) => sum + priceOf(id) * qty, 0);
+    const cartDiscount = () => cartSubtotal() > 25 ? Math.round(cartSubtotal() * 0.15 * 100) / 100 : 0;
+    const cartTotal = () => Math.round((cartSubtotal() - cartDiscount()) * 100) / 100;
 
     function vegIconSVG(isVeg) {
       return isVeg
@@ -4476,7 +4536,7 @@
     <div class="dish-content">
       <div class="dish-top">
         <div class="dish-title-row">${vegIconSVG(item.veg)}<span class="dish-name">${item.name}</span></div>
-        <span class="dish-price"><s class="price-original">${fmt(item.price)}</s><span class="price-final">${fmt(discountedPrice(item.price))}</span></span>
+        <span class="dish-price"><span class="price-final">${fmt(item.price)}</span></span>
       </div>
       <p class="dish-desc">${item.desc}</p>
       <div class="dish-bottom">
@@ -4509,7 +4569,7 @@
       <span class="qty-val">${qty}</span>
       <button type="button" class="qty-plus" aria-label="Increase quantity">+</button>
     </div>
-    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <span class="addon-price"><span class="price-final">${fmt(discountedPrice(addon.price))}</span></span></button>
+    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <span class="price-final">${fmt(addon.price)}</span></button>
   </div>`;
     }
 
@@ -4687,8 +4747,6 @@
 
     /* ---------------- CART DRAWER ---------------- */
     function cartCount() { return Object.values(cart).reduce((a, b) => a + b, 0); }
-    function cartTotal() { return Object.entries(cart).reduce((sum, [id, qty]) => sum + priceOf(id) * qty, 0); }
-
     function renderCart() {
       const itemsEl = $("#cartItems");
       const badge = $("#cartBadge");
@@ -4736,12 +4794,28 @@
         });
       }
 
+      $("#cartSubtotal").textContent = fmt(cartSubtotal());
+      $("#cartDiscountRow").hidden = cartDiscount() === 0;
+      $("#cartDiscount").textContent = "−" + fmt(cartDiscount());
       $("#cartTotal").textContent = fmt(cartTotal());
       $("#checkoutBtn").disabled = entries.length === 0;
       renderRecap();
     }
 
-    function openCart() { $("#cartDrawer").classList.add("open"); $("#overlay").classList.add("show"); window.Track?.event("cart_open", "", cartTotal(), { items: cartCount() }); }
+    let lastDiscountCelebration = 0;
+    let discountCelebrationTimer;
+    function celebrateDiscount() {
+      if (cartDiscount() <= 0 || Date.now() - lastDiscountCelebration < 3500) return;
+      lastDiscountCelebration = Date.now();
+      const celebration = $("#discountCelebration");
+      celebration.classList.remove("show");
+      void celebration.offsetWidth;
+      celebration.classList.add("show");
+      clearTimeout(discountCelebrationTimer);
+      discountCelebrationTimer = setTimeout(() => celebration.classList.remove("show"), 3300);
+    }
+
+    function openCart() { $("#cartDrawer").classList.add("open"); $("#overlay").classList.add("show"); celebrateDiscount(); window.Track?.event("cart_open", "", cartTotal(), { items: cartCount() }); }
     function closeCart() { $("#cartDrawer").classList.remove("open"); $("#overlay").classList.remove("show"); }
 
     /* ---------------- CHECKOUT MODAL ---------------- */
@@ -4752,6 +4826,8 @@
         const item = ITEM_INDEX[id];
         return `<div class="recap-line"><span>${item.name} × ${qty}</span><span>${fmt(priceOf(id) * qty)}</span></div>`;
       }).join("");
+      lines.innerHTML += `<div class="recap-line"><span>Subtotal</span><span>${fmt(cartSubtotal())}</span></div>`;
+      if (cartDiscount() > 0) lines.innerHTML += `<div class="recap-line"><span>15% discount (Above &pound;25)</span><span>−${fmt(cartDiscount())}</span></div>`;
       $("#recapTotal").textContent = fmt(cartTotal());
     }
 
@@ -4768,6 +4844,7 @@
       currentOrderId = null; // fresh order id for this checkout session
       window.Track?.event("begin_checkout", ensureOrderId(), cartTotal(), { items: cartCount() });
       $("#checkoutModal").classList.add("show");
+      celebrateDiscount();
       document.body.style.overflow = "hidden";
     }
     function closeCheckout() {
@@ -4867,6 +4944,8 @@
         lines.push(`${i + 1}. ${item.name}  ×${qty}  —  ${fmt(priceOf(id) * qty)}`);
       });
       lines.push(divider);
+      lines.push(`Subtotal: ${fmt(cartSubtotal())}`);
+      if (cartDiscount() > 0) lines.push(`15% discount (Above &pound;25): −${fmt(cartDiscount())}`);
       lines.push(`*Total: ${fmt(cartTotal())}*`);
       lines.push(`Payment Method: *${methodLabel}*`);
       if (f.method === "bank") lines.push(`Reference: ${f.name}`);
@@ -4900,6 +4979,8 @@
         lines.push((i + 1) + ". " + item.name + "  x" + qty + "  —  " + fmt(priceOf(id) * qty));
       });
       lines.push(divider);
+      lines.push("Subtotal: " + fmt(cartSubtotal()));
+      if (cartDiscount() > 0) lines.push("15% discount (Above &pound;25): -" + fmt(cartDiscount()));
       lines.push("Total: " + fmt(cartTotal()));
       lines.push("Payment Method: " + methodLabel);
       if (f.method === "bank") lines.push("Reference: " + f.name);
