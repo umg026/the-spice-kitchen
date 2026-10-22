@@ -1489,6 +1489,17 @@
       color: var(--maroon);
     }
 
+    .discount-tag {
+      display: inline-block;
+      margin-top: 2px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #e8f4e9;
+      color: #246b32;
+      font: 700 9px/1.2 var(--ff-eyebrow);
+      letter-spacing: .04em;
+    }
+
     .dish-desc {
       font-size: 13.5px;
       color: var(--ink-text-dim);
@@ -4060,14 +4071,6 @@
 
   <!-- ================= CART DRAWER ================= -->
   <div class="overlay" id="overlay"></div>
-  <div class="discount-celebration" id="discountCelebration" role="status" aria-live="polite">
-    <span class="confetti" aria-hidden="true">✦</span>
-    <span class="confetti" aria-hidden="true">✦</span>
-    <span class="confetti" aria-hidden="true">✦</span>
-    <span class="confetti" aria-hidden="true">✦</span>
-    🎉 You’ve unlocked 15% off!
-  </div>
-
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
     <div class="drawer-head">
       <h3>
@@ -4090,7 +4093,6 @@
     <div class="cart-items" id="cartItems"></div>
     <div class="drawer-foot" id="cartFoot">
       <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal">&pound;0.00</span></div>
-      <div class="summary-row" id="cartDiscountRow" hidden><span>15% discount(Above &pound;25)</span><span id="cartDiscount">−&pound;0.00</span></div>
       <div class="summary-row total"><span>Total</span><span id="cartTotal">&pound;0.00</span></div>
       <button class="btn btn-primary btn-block" id="checkoutBtn" disabled>Checkout</button>
     </div>
@@ -4431,10 +4433,10 @@
     const $ = sel => document.querySelector(sel);
     const $all = sel => Array.from(document.querySelectorAll(sel));
 
-    const priceOf = id => ITEM_INDEX[id].price;
+    const originalPriceOf = id => ITEM_INDEX[id].price;
+    const priceOf = id => Math.round(originalPriceOf(id) * 0.85 * 100) / 100;
     const cartSubtotal = () => Object.entries(cart).reduce((sum, [id, qty]) => sum + priceOf(id) * qty, 0);
-    const cartDiscount = () => cartSubtotal() > 25 ? Math.round(cartSubtotal() * 0.15 * 100) / 100 : 0;
-    const cartTotal = () => Math.round((cartSubtotal() - cartDiscount()) * 100) / 100;
+    const cartTotal = () => Math.round(cartSubtotal() * 100) / 100;
 
     function vegIconSVG(isVeg) {
       return isVeg
@@ -4536,7 +4538,7 @@
     <div class="dish-content">
       <div class="dish-top">
         <div class="dish-title-row">${vegIconSVG(item.veg)}<span class="dish-name">${item.name}</span></div>
-        <span class="dish-price"><span class="price-final">${fmt(item.price)}</span></span>
+        <span class="dish-price"><span class="price-original">${fmt(item.price)}</span><span class="price-final">${fmt(Math.round(item.price * 0.85 * 100) / 100)}</span><span class="discount-tag">15% OFF</span></span>
       </div>
       <p class="dish-desc">${item.desc}</p>
       <div class="dish-bottom">
@@ -4569,7 +4571,7 @@
       <span class="qty-val">${qty}</span>
       <button type="button" class="qty-plus" aria-label="Increase quantity">+</button>
     </div>
-    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <span class="price-final">${fmt(addon.price)}</span></button>
+    <button type="button" class="add-btn btn-sm" data-id="${addon.id}">Add · <span class="price-original">${fmt(addon.price)}</span> <span class="price-final">${fmt(Math.round(addon.price * 0.85 * 100) / 100)}</span></button>
   </div>`;
     }
 
@@ -4770,7 +4772,7 @@
       <div class="cart-line" data-id="${id}">
         <div class="cart-line-info">
           <strong>${item.name}</strong>
-          <span>${fmt(unit)} each</span>
+          <span><s>${fmt(originalPriceOf(id))}</s> ${fmt(unit)} each · 15% off</span>
         </div>
         <div class="cart-line-right">
           <span class="cart-line-price">${fmt(unit * qty)}</span>
@@ -4795,27 +4797,12 @@
       }
 
       $("#cartSubtotal").textContent = fmt(cartSubtotal());
-      $("#cartDiscountRow").hidden = cartDiscount() === 0;
-      $("#cartDiscount").textContent = "−" + fmt(cartDiscount());
       $("#cartTotal").textContent = fmt(cartTotal());
       $("#checkoutBtn").disabled = entries.length === 0;
       renderRecap();
     }
 
-    let lastDiscountCelebration = 0;
-    let discountCelebrationTimer;
-    function celebrateDiscount() {
-      if (cartDiscount() <= 0 || Date.now() - lastDiscountCelebration < 3500) return;
-      lastDiscountCelebration = Date.now();
-      const celebration = $("#discountCelebration");
-      celebration.classList.remove("show");
-      void celebration.offsetWidth;
-      celebration.classList.add("show");
-      clearTimeout(discountCelebrationTimer);
-      discountCelebrationTimer = setTimeout(() => celebration.classList.remove("show"), 3300);
-    }
-
-    function openCart() { $("#cartDrawer").classList.add("open"); $("#overlay").classList.add("show"); celebrateDiscount(); window.Track?.event("cart_open", "", cartTotal(), { items: cartCount() }); }
+    function openCart() { $("#cartDrawer").classList.add("open"); $("#overlay").classList.add("show"); window.Track?.event("cart_open", "", cartTotal(), { items: cartCount() }); }
     function closeCart() { $("#cartDrawer").classList.remove("open"); $("#overlay").classList.remove("show"); }
 
     /* ---------------- CHECKOUT MODAL ---------------- */
@@ -4827,7 +4814,6 @@
         return `<div class="recap-line"><span>${item.name} × ${qty}</span><span>${fmt(priceOf(id) * qty)}</span></div>`;
       }).join("");
       lines.innerHTML += `<div class="recap-line"><span>Subtotal</span><span>${fmt(cartSubtotal())}</span></div>`;
-      if (cartDiscount() > 0) lines.innerHTML += `<div class="recap-line"><span>15% discount (Above &pound;25)</span><span>−${fmt(cartDiscount())}</span></div>`;
       $("#recapTotal").textContent = fmt(cartTotal());
     }
 
@@ -4945,7 +4931,6 @@
       });
       lines.push(divider);
       lines.push(`Subtotal: ${fmt(cartSubtotal())}`);
-      if (cartDiscount() > 0) lines.push(`15% discount (Above &pound;25): −${fmt(cartDiscount())}`);
       lines.push(`*Total: ${fmt(cartTotal())}*`);
       lines.push(`Payment Method: *${methodLabel}*`);
       if (f.method === "bank") lines.push(`Reference: ${f.name}`);
@@ -4980,7 +4965,6 @@
       });
       lines.push(divider);
       lines.push("Subtotal: " + fmt(cartSubtotal()));
-      if (cartDiscount() > 0) lines.push("15% discount (Above &pound;25): -" + fmt(cartDiscount()));
       lines.push("Total: " + fmt(cartTotal()));
       lines.push("Payment Method: " + methodLabel);
       if (f.method === "bank") lines.push("Reference: " + f.name);
